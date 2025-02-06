@@ -25,6 +25,7 @@ Look at the subsetted severity amongst the different sample types (stool, sputum
 - sufficient to do it within one dataset but two datasets would be better for increased sample size
 - novel in a sense that no one has ever compared these two datasets before; can be cool to compare with different datasets to see if it matches during the research proposal draft
 - keep one column that says source then determine if it's data 1 or data 2
+
 Two datasets:
 - Batch effect and correct can be added in the aim
 
