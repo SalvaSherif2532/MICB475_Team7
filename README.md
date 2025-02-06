@@ -20,6 +20,7 @@ Initial site of infection: throat, secondary site of infection: lung, and site o
 
 Look at the abundance of the microbes from one place to another - can do that from the throat to the lung to the gut  
  - but we don't have longitudinal data
+
 Look at the subsetted severity amongst the different sample types (stool, sputum, and swab)
 - make sure the severity is annotated the same way between the two datasets (e.g. hospitalization) - reannotate them as high, low, and medium
 - annotate them somewhat similarly as best as possible
