@@ -13,11 +13,12 @@
   * Is there any value in looking for more datasets with different diseases?
 
 ### February 6, 2025 Minutes
-Should we merge the two usable datasets or stick with the initial idea of comparing two different diseases?
-We can find one dataset of human influenza by the end of the day
-Merge both datasets and compare diverisities
-Initial site of infection: throat, secondary site of infection: lung, and site of infection that isn't seen as much: gut
-Look at the abundance of the microbes from one place to another - can do that from the throat to the lung to the gut
+Should we merge the two usable datasets or stick with the initial idea of comparing two different diseases?  
+We can find one dataset of human influenza by the end of the day  
+Merge both datasets and compare diverisities  
+Initial site of infection: throat, secondary site of infection: lung, and site of infection that isn't seen as much: gut  
+
+Look at the abundance of the microbes from one place to another - can do that from the throat to the lung to the gut  
  - but we don't have longitudinal data
 Look at the subsetted severity amongst the different sample types (stool, sputum, and swab)
 - make sure the severity is annotated the same way between the two datasets (e.g. hospitalization) - reannotate them as high, low, and medium
