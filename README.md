@@ -9,6 +9,7 @@
 * Create our question
   * Which microbiome sampling site is the most alpha and beta diversity amongst COVID-19 patients?
   * Which microbial phyla are the most common across all microbiome sampling sites in COVID-19 patients?
+  * Are there specific microbial phyla that are associated with specific sampling sites in COVID-19 patients? Is this associated with RSI_d levels?
 
 ### February 6, 2025 Agenda
 * Review studies identified as usable
