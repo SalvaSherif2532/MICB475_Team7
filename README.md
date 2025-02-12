@@ -2,6 +2,14 @@
 
 #### [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
 
+### February 13, 2025
+* Talk about how to make a proposal
+* General outline or timeline of the proposal
+* Update on the metadata files from last week
+* Create our question
+  * Which microbiome sampling site is the most alpha and beta diversity amongst COVID-19 patients?
+  * Which microbial phyla are the most common across all microbiome sampling sites in COVID-19 patients?
+
 ### February 6, 2025 Agenda
 * Review studies identified as usable
 * Nail down the broad questions we would potentially like to explore and ask
