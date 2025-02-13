@@ -2,7 +2,7 @@
 
 #### [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
 
-### February 13, 2025
+### February 13, 2025 Agenda
 * Talk about how to make a proposal
 * General outline or timeline of the proposal
 * Update on the metadata files from last week
@@ -10,6 +10,64 @@
   * Which microbiome sampling site is the most alpha and beta diversity amongst COVID-19 patients?
   * Which microbial phyla are the most common across all microbiome sampling sites in COVID-19 patients?
   * Are there specific microbial phyla that are associated with specific sampling sites in COVID-19 patients? Is this associated with RSI_d levels?
+ 
+### February 13, 2025
+* Mammalia et al doesn't have many categories or usable metadata variables
+  * RSI can be used as a metric of severity
+  * host disease - ICU, control, and COVID (COVID patients that didn't go to the ICU)
+ * The papers look at different countries
+  * Initial plan is to merge the two datasets but this can be a confounding factor, and we might have to look at them separately down the line
+* Potential hypothesis: location may affect the sample types
+  * Is location sample type-specific?
+  * First we look at the overall microbiome diversity of each location and see if they're sample type-specific. If they're not, then we can merge the dataset
+* Need to tie in location and sample type
+  * Have people already looked at different locations and different sample types? - for the proposal
+  * Same inidividual and different sample types
+* Look at sample types, but we wanted to increase sample number so we merged two datasets
+  * If they are different (two locations), we decided to just do one dataset but if it's the same, then we can just merge them and look at sample type
+* Do machine learning on disease severity
+* Look at primers used to identify the region that's amplified but there's a script in qiime to just merge them together
+* Predictive modeling
+  * Do functional analysis between more sever and less severe, then predict the information that doesn't have severity
+  * Do a beta diversity test
+  * Do analysis on one dataset, and based on these results, what would the severity look like for the other dataset
+  * Not very clear what the severity or host disease column looks like - future directions
+  * Decide one location or test whether they're different, and if they're different, then it would be treated on only one
+  * Look at two different clusters - sample type location and severity - 
+  * Cannot conclude accuracy of the predictive model but we can reason out that they are two different geographical locations if severity doesn't align
+  * Look at how similar the swab and naseopharyngeal are
+  * Use the 300 sample dataset to predict severity
+
+Proposal
+* Look at similarity between swab and sputum first
+* Run the predictive modeling on nasopharyngeal to predict if the severity in the Galeeva et al dataset coincides with the severity seen in the Al-Momani et al dataset
+  * We can keep the control and see if it gets defined as less severe
+  * In our paper, we can say limitation as we have a low sample size
+  * If swab and sputum are different from each other, then we can only run it against the swab samples (n = ~50)
+* For now, we won't touch it geographical location
+  * If the predictive model isn't good, then we can say that it may be because of the different geographical locations
+* Future Directions: Look at more datasets
+
+Proposal Information
+* Proposed title: shouldn't be conclusive but also not very broad
+  * You don't want to say the effect of SARS-COV-2 on patient
+  * Mention severity
+  * Generating a predictive model... (specific)
+* Background: Define everything
+  * Don't say that no one has ever looked at this before
+  * Other people have looked at the same broad topic but they looked at e.g. different sample types
+  * why are these sample types more important to look like - easier to obtain and more relevant, viral replication occurs more
+* Research gap: should all be based on literature
+* Hypothesis: should have a direction
+  * From the literature research, you will create a hypothesis (ie more severe disease will have more specific phyla?)
+  * hypothesis or prediction
+* Aim/Rationale: how can testing this help with answering your research question
+  * You want to compare alpha diversity because it will provide community richness, for example
+  * Be very specific
+* Proposed approach: have a table that has steps 1, 2, 3, 4...
+  * Step 1: you do the qiime to create an output a file
+  * Step 2: we use this output file to do analysis
+* We can schedule a zoom meeting with Bessie during the reading break
 
 ### February 6, 2025 Agenda
 * Review studies identified as usable
