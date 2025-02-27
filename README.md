@@ -13,6 +13,23 @@
   * Perform beta and alpha diversity between the two datasets (Galeeva and Al Momani)
   * Do the same thing for Al-Momani but with swab and sputum
     * If we see two distinct clusters in the PCoA plot, then we can't combine them
+   
+### February 27, 2025
+* Housekeeping for proposal:
+  * Research Objectives and Flow Chart wasn't part of the rubric even though it was part of the examples
+* Predictive model - hinting at machine learning (random forest modeling, KNN) - should we still do this?
+  * no need for two datasets
+  * once you confirm that it's going well, then you can apply it to the other datasets
+  * if we're not predictive modeling, we can just do all the analysis and find similar effects between the two independent cohorts
+* Bessie will confirm if we can do predictive modeling on n=300 (Galeeva) - sample size might be too small
+  * we cannot merge the two datasets because the batch effect might be significant
+  * if they say it's too small, then we're going to be doing a comparative analysis
+  * if they say yes, then we have to specify what kind of predictive model in the proposal for the proposal revision
+* Bessie will also send manuscript from previous team that did random forest model, and script should be in the Github
+* Big dataset has poor read quality and the small dataset has good read quality
+  * use the reverse reads? It's better than forward reads
+  * datasets used paired-end sequencing rather than single-read sequencing
+* Bessie will ask during the meeting what the next steps are
 
 ### February 13, 2025 Agenda
 * Talk about how to make a proposal
