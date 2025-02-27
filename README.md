@@ -1,6 +1,18 @@
 # MICB475_Team7  
 
 #### [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
+### February 27, 2025 Agenda
+* Perform beta and alpha diversity analyses this week - Melika and Rana
+  * Do it in R
+  * Write one script
+  * Do the whole github commit thing
+  * Create a new branch, run three lines of code - add github repository, pull the branch, and add to the branch
+    * Better practice to do this
+* Upload proposal to github
+* To Do:
+  * Perform beta and alpha diversity between the two datasets (Galeeva and Al Momani)
+  * Do the same thing for Al-Momani but with swab and sputum
+    * If we see two distinct clusters in the PCoA plot, then we can't combine them
 
 ### February 13, 2025 Agenda
 * Talk about how to make a proposal
