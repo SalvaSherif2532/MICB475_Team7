@@ -9,6 +9,7 @@
 * Clarify with Bessie - gantt chart feedback
 * Ask Bessie for Random Forest package code
 * Melika will show Salva push/pull github
+* Save phyloseq object as rds instead of RData
 
 ### February 27, 2025 Agenda
 * Perform beta and alpha diversity analyses this week - Melika and Rana
