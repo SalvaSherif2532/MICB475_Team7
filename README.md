@@ -1,7 +1,7 @@
 # MICB475_Team7  
 
 #### [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
-### March 6, 2025 Agenda
+### March 6, 2025 Agenda - Rana
 * Bring up feedback that Hans provided and say that it's not found in the rubric
   * Sample proposals are a bit hard to follow
 * Talk about sample size - Galeeva et al only has over 200 samples
