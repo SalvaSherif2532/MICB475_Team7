@@ -14,6 +14,7 @@
   * Ask Bessie if we need to separate Experimental Aim 1 into 2 aims
 
 #### Data Analysis & Technical Questions
+* Our analyses so far: [Alpha Diversity slideshow](https://docs.google.com/presentation/d/1QYmrx55R0sf_luTHFyXFm0kVte5Vt1xLI5hQf_85aw0/edit?usp=sharing)
 * Talk about sample size - Galeeva et al only has over 200 samples after rarefaction
 * How do we want to label the severity titles
 * Save phyloseq object as rds instead of RData - function is not found in R when Josh ran it
