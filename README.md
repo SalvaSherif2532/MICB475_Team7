@@ -2,15 +2,25 @@
 
 #### [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
 ### March 6, 2025 Agenda - Rana
-* Bring up feedback that Hans provided and say that it's not found in the rubric
-  * Sample proposals are a bit hard to follow
-* Talk about sample size - Galeeva et al only has over 200 samples
+#### Updates
+* Going forward we will have a meeting chair (in charge of agenda, keeping meeting on time, and taking meeting minutes) --> today it's Rana (me!)
+
+#### Porposal Feedback & Resubmission
+* Feedback on proposal:
+  * In future, if Evelyn can confirm what aspects of provided examples are no longer relevant/needed, it would help us a lot!
+  * What should we change on our proposal (in your opinion)
+  * What needs to be hashed out in more detail on the proposal
+  * Clarification on gantt chart feedback
+  * Ask Bessie if we need to separate Experimental Aim 1 into 2 aims
+
+#### Data Analysis & Technical Questions
+* Talk about sample size - Galeeva et al only has over 200 samples after rarefaction
 * How do we want to label the severity titles
-* Clarify with Bessie - gantt chart feedback
-* Ask Bessie for Random Forest package code
-* Melika will show Salva push/pull github
 * Save phyloseq object as rds instead of RData - function is not found in R when Josh ran it
-* Ask Bessie if we need to separate Experimental Aim 1 into 2 aims
+* Ask Bessie for Random Forest package code (I think I actually have this)
+
+* SIDE NOTE:
+  * Salva will show Melika push/pull github
 
 ### February 27, 2025 Agenda
 * Perform beta and alpha diversity analyses this week - Melika and Rana
