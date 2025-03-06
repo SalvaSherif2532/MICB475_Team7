@@ -5,7 +5,7 @@
 #### Updates
 * Going forward we will have a meeting chair (in charge of agenda, keeping meeting on time, and taking meeting minutes) --> today it's Rana (me!)
 
-#### Porposal Feedback & Resubmission
+#### Proposal Feedback & Resubmission
 * Feedback on proposal:
   * In future, if Evelyn can confirm what aspects of provided examples are no longer relevant/needed, it would help us a lot!
   * What should we change on our proposal (in your opinion)
@@ -17,11 +17,26 @@
 * Our analyses so far: [Alpha Diversity slideshow](https://docs.google.com/presentation/d/1QYmrx55R0sf_luTHFyXFm0kVte5Vt1xLI5hQf_85aw0/edit?usp=sharing)
 * Talk about sample size - Galeeva et al only has over 200 samples after rarefaction
 * How do we want to label the severity titles
-* Save phyloseq object as rds instead of RData - function is not found in R when Josh ran it
+* Save phyloseq object as rds instead of RData - function is not found in R when Josh ran it - done!
 * Ask Bessie for Random Forest package code (I think I actually have this)
 
 * SIDE NOTE:
   * Salva will show Melika push/pull github
+ 
+### March 6, 2025 Agenda
+* Introduction feedback
+  * Scrap last two paragraphs of intro and move it to discussion
+  * Don't talk about geographical locations
+* Gantt feedback - Salva changed it
+* Citations - reference main packages only
+* Experimental Aims - split the first aim into two
+* Sample size is only gonna be a concern if it's less than 100
+* Labeling severity legends - change to severe and non-severe so it's easier to write
+* For swab and sputum samples, maybe do a taxa bar plot
+  * more severe COVID-19 has a more even distribution
+  * maybe less severe COVID-19 has a more dominant specieces that can be shown through a taxa bar plot
+  * if we merge them, then we say upper respiratory tract
+* Send zip files to Bessie
 
 ### February 27, 2025 Agenda
 * Perform beta and alpha diversity analyses this week - Melika and Rana
