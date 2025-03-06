@@ -5,20 +5,37 @@
 #### Updates
 * Going forward we will have a meeting chair (in charge of agenda, keeping meeting on time, and taking meeting minutes) --> today it's Rana (me!)
 
-#### Proposal Feedback & Resubmission
+#### Porposal Feedback & Resubmission
 * Feedback on proposal:
   * In future, if Evelyn can confirm what aspects of provided examples are no longer relevant/needed, it would help us a lot!
   * What should we change on our proposal (in your opinion)
+    * Makes it seem like our intro is focusing on the lack of good treatments --> focus more on severity (symptom ranges, hospitalization range) --> focus on disease heterogeneity --> difficult to predict this
+    * Then introduce the argument of why the nasopharyngeal microbiome can be used as a predictor (provide more evidence on this) --> can come from other respiratory illnesses or COVID-specific (we have evidence already here)
+    * Also mention why nasopharyngeal microbiome is a better predictor than other microbiome locations
+    * But then highlight here what info is still missing to actually use this as a predictor
+    * need to define dysbiosis
+    * when we talk about which pathogens are associated with severe disease, try to explain the biology/mechanism for why
+    * Remove anything about geographical locations
+    * For hypothesis and prediction focus just on how accurate we think our predictive model will be based on what's been highighted in previous research
   * What needs to be hashed out in more detail on the proposal
+    * not much, focus less on geographical location/patient cohort difference, focus more on will this predictive model work and why and how will it be better than gut microbiome
   * Clarification on gantt chart feedback
+    * Just explicitly add Aim 2 and Aim 3 on the table, but not major at all
+    * Also don't need to cite every package
   * Ask Bessie if we need to separate Experimental Aim 1 into 2 aims
+    * yes definitely! (Sorry guys lots to change!)
 
 #### Data Analysis & Technical Questions
 * Our analyses so far: [Alpha Diversity slideshow](https://docs.google.com/presentation/d/1QYmrx55R0sf_luTHFyXFm0kVte5Vt1xLI5hQf_85aw0/edit?usp=sharing)
+   * taxa bar plot on both and then decided about merging the 2 sample types
 * Talk about sample size - Galeeva et al only has over 200 samples after rarefaction
+   * this is fine!
 * How do we want to label the severity titles
-* Save phyloseq object as rds instead of RData - function is not found in R when Josh ran it - done!
+   * up to us, but best to keep consistent going forward
+* Save phyloseq object as rds instead of RData - function is not found in R when Josh ran it
+  * Yes, perfect Melika please send .Rdata to Bessie because Evelyn wants to use and going forward everyone use .rds (Josh uploaded this onto github)
 * Ask Bessie for Random Forest package code (I think I actually have this)
+   * yes, we have it, Bessie hasn't tested it yet 
 
 * SIDE NOTE:
   * Salva will show Melika push/pull github
