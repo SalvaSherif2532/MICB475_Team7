@@ -1,7 +1,7 @@
 library(phyloseq)
 library(tidyverse)
 library(ggplot2)
-library(RColorBrewer)
+library(viridis)
 
 ## Load RDS objects
 galeeva <- readRDS("~/MICB_475/galeeva_rare.rds")
