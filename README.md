@@ -5,7 +5,15 @@
 #### Updates
 * Going forward we will have a meeting chair (in charge of agenda, keeping meeting on time, and taking meeting minutes) --> today it's Rana (me!)
 
-#### Porposal Feedback & Resubmission
+### March 13, 2025 Agenda
+* Determine threshold/cutoff for the DESeq analysis
+* Taxa bar plots and DESeq analysis both show that there is a difference in abundance between swab and sputum - might not combine
+* Sputum should be used moving forward
+* Should we do an Indicator Species Analysis - there might be species that are very distinctive - or should we just use the highest threshold of the DESeq plot
+* Ask Bessie how to generate the random forest classification model
+  * Clarify how many samples we want the model to train on
+
+#### Proposal Feedback & Resubmission
 * Feedback on proposal:
   * In future, if Evelyn can confirm what aspects of provided examples are no longer relevant/needed, it would help us a lot!
   * What should we change on our proposal (in your opinion)
