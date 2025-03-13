@@ -5,13 +5,49 @@
 #### Updates
 * Going forward we will have a meeting chair (in charge of agenda, keeping meeting on time, and taking meeting minutes) --> today it's Rana (me!)
 
-### March 13, 2025 Agenda
+### March 13, 2025 Agenda - Melika
 * Determine threshold/cutoff for the DESeq analysis
 * Taxa bar plots and DESeq analysis both show that there is a difference in abundance between swab and sputum - might not combine
 * Sputum should be used moving forward
 * Should we do an Indicator Species Analysis - there might be species that are very distinctive - or should we just use the highest threshold of the DESeq plot
 * Ask Bessie how to generate the random forest classification model
   * Clarify how many samples we want the model to train on
+ 
+### March 13, 2025
+* Threshold depends on us. Compare the two datasets.
+  * 1.5 is used by a lot of different literature. 2.5 can be used to minimize variation.
+* Just gonna go with the sputum moving forward - based on taxa bar plot and DESeq2 analysis
+* Can always fix them in illustrator
+* Galeeva et al taxa bar plot
+  * Significant increase in navy blue colour in the hospitalized treatment - we can look into it
+  * Look further into chloroflexi (presumably)
+  * Lack of the darkest colour in the hospitalized group
+* Taxa bar plot can be part of the supplement
+* Perform indicator species analyses and do the core microbiome analysis
+* Annotate significance on the figures for alpha and beta diversity
+  * For the beta diversity, we would need another table to list all P values or a box plot that shows the signifcant P values
+* Bessie will walk through the script for the random forest model today
+  * Traditionally, it's trained 70/30 - our sample size is good enough
+  * for a smaller dataset, you want more training proportions so 80/20
+
+* Random forest script
+  * two files - creating a dataset and
+  * we can use the existing phyloseq object
+  * create dataset: we will only be keeping taxa that has the highest level
+    * OTC table - first column (clade), it will count the number of separators and the resolution it resolves to
+    * only uses the highest resolution ones - filters OTU table
+  * change Select() input towards the end
+  * generates an importance plot - shows which one has the strongest predictor, but it has nothing to do with how good the model is
+  * can't select too much annotations because it might overfit the model
+  * what we need to change in this code:
+    * path to metadata
+    * meta = read_excel change to read_csv
+    * keep number of folds to 10
+
+* To do list:
+  * Perform indicator species analysis and core microbiome analysis
+  * Add a table to list all P values or a box plot that shows significant P values
+  * Make sure the DESeq2 analysis is resolved in the same level
 
 #### Proposal Feedback & Resubmission
 * Feedback on proposal:
