@@ -1,0 +1,85 @@
+---
+title: "Random Forest - Create Dataset"
+author: "Avril Metcalfe-Roach"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+# Part 1: Load packages and download data
+
+We will use Wallen et. al (2022), a pre-annotated Parkinson's disease dataset, for our
+Random Forest tutorials.
+
+Download the source data into your working folder:
+<https://zenodo.org/records/7246185> Keep the name of the file as
+`Source_Data_24Oct2022.xlsx`.
+
+```{r}
+# Load packages:
+library(tidyverse)
+library(phyloseq)
+library(readxl) # Should have downloaded alongside the tidyverse package
+
+# Copy the file path to the source data here (this will make subsequent coding easier)
+# Include the name of the file as shown below.
+filepath = "C:/path/to/Source_Data_24Oct2022.xlsx"
+```
+
+# Part 2: Create objects
+
+We will load all of the necessary data tables from the data file.
+
+## 2a: Metadata
+
+FYI: the sample order MUST be identical to the order in the OTU tables. The
+order is the same here, but you may occasionally encounter errors in other
+datasets.
+
+```{r}
+meta = read_excel(filepath, sheet = "subject_metadata") 
+View(meta)
+meta = meta %>% 
+  column_to_rownames('sample_name') %>% 
+  sample_data() # This turns it into a phyloseq-compatible format.
+```
+
+## 2b: Taxonomy
+
+```{r}
+# Taxonomic OTU table
+otu_tax = read_excel(filepath, sheet = "metaphlan_counts") 
+View(otu_tax)
+otu_tax = otu_tax %>% 
+  # Use [ ] to read | as a regular character instead of a special character
+  mutate(level = str_count(clade_name,'[|]')) %>% # Count | in each clade_name value
+  # Higher resolution means more | symbols. Extract highest resolution (species).
+  filter(level == max(.$level)) %>% # . refers to 'the data up until this code line'
+  select(-level)
+
+# Separate out the taxonomy data from the OTU table and format it
+tax_table = otu_tax %>% 
+  select(clade_name) %>% 
+  # Note that [ ] aren't needed here for |
+  separate_wider_delim(clade_name,'|', cols_remove = F,
+                       names=c('Kingdom','Phylum','Class','Order',
+                               'Family','Genus','Species')) %>%   
+  column_to_rownames('clade_name') %>% 
+  as.matrix() %>% 
+  tax_table() # Phyloseq-compatible format
+
+# Finish turning otu_tax into a phyloseq-compatible format
+# (Can't do this before extracting tax_table info in previous step)
+otu_tax = otu_tax %>% 
+  column_to_rownames('clade_name') %>% 
+  as.matrix() %>% otu_table(taxa_are_rows = T) # Phyloseq-compatible format
+```
+
+# Part 3: Save as an R object
+
+```{r}
+ps = phyloseq(meta,tax_table,otu_tax)
+View(ps)
+
+# .rds files save any R object, where it can be reloaded in its exact format.
+saveRDS(ps,'path/to/save/location/taxonomy_phyloseq.rds')
+```
