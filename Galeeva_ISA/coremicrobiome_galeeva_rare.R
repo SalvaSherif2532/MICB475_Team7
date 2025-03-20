@@ -17,8 +17,8 @@ galeeva_rare_nonsevere <- subset_samples(galeeva_rare_RA, `inpatient`=="Ambulato
 galeeva_rare_severe <- subset_samples(galeeva_rare_RA, `inpatient`=="Hospitalized")
 
 # Set a prevalence threshold and abundance threshold. Be prepared to justify
-nonsevere_rare_ASVs <- core_members(galeeva_rare_nonsevere, detection=0.001, prevalence = 0.5)
-severe_rare_ASVs <- core_members(galeeva_rare_severe, detection=0.001, prevalence = 0.5)
+nonsevere_rare_ASVs <- core_members(galeeva_rare_nonsevere, detection=0.001, prevalence = 0.5 )
+severe_rare_ASVs <- core_members(galeeva_rare_severe, detection=0.001, prevalence = 0.5 )
 prune_taxa(nonsevere_rare_ASVs,galeeva_rare_CM) %>%
   tax_table()
 prune_taxa(severe_rare_ASVs,galeeva_rare_CM) %>%
