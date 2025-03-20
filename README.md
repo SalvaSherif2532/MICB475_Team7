@@ -17,6 +17,8 @@
   * Definitely not overfitting the model
   * Bessie will ask around if it's normal
   * Veillonella and Prevotella are top 2 predictor variables that are also unique to the core microbiome of severe patients
+* Have some slides prepared for Bessie
+* To Do: Glom DESeq2, choose aesthetics, histograms for ISA
 
 ### March 13, 2025 Agenda - Melika
 * Determine threshold/cutoff for the DESeq analysis
