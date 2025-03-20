@@ -6,8 +6,11 @@ library(ggVennDiagram)
 
 galeeva_rare_CM <- readRDS("galeeva_rare.rds")
 
+#Glom to genus level
+galeeva_genus <- tax_glom(galeeva_rare_CM, "Genus", NArm = FALSE)
+
 # Convert to relative abundance
-galeeva_rare_RA <- transform_sample_counts(galeeva_rare_CM, fun=function(x) x/sum(x))
+galeeva_rare_RA <- transform_sample_counts(galeeva_genus, fun=function(x) x/sum(x))
 
 # Subset dataset into treatment and control groups
 galeeva_rare_nonsevere <- subset_samples(galeeva_rare_RA, `inpatient`=="Ambulatory treatment")
@@ -23,4 +26,4 @@ prune_taxa(severe_rare_ASVs,galeeva_rare_CM) %>%
 
 # Make a Venn-diagram
 ven_galeeva_rare <- ggVennDiagram(x=list(Severe = severe_rare_ASVs, Nonsevere = nonsevere_rare_ASVs))
-ggsave("venn_galeeva_rare.png", ven_galeeva_rare)
+ggsave("venn_galeeva_rare_glom.png", ven_galeeva_rare)

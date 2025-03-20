@@ -23,12 +23,14 @@ write_tsv(galeeva_final_res, "galeeva_final_res.tsv")
 
 #Indicator Species Analysis on galeeva rare
 galeeva_rare_ISA <- readRDS("galeeva_rare.rds")
-isa_galeeva_rare <- multipatt(t(otu_table(galeeva_rare_ISA)), cluster = sample_data(galeeva_rare_ISA)$'inpatient')
+galeeva_glom <- tax_glom(galeeva_rare_ISA, "Genus", NArm = FALSE)
+galeeva_genus_RA_ISA <- transform_sample_counts(galeeva_glom, fun=function(x) x/sum(x))
+isa_galeeva_rare <- multipatt(t(otu_table(galeeva_genus_RA_ISA)), cluster = sample_data(galeeva_genus_RA_ISA)$'inpatient')
 # Look at results
 summary(isa_galeeva_rare)
 
 # Extract taxonomy table
-galeeva_rare_taxtable <- tax_table(galeeva_rare_ISA) %>% as.data.frame() %>% rownames_to_column(var="ASV")
+galeeva_rare_taxtable <- tax_table(galeeva_genus_RA_ISA) %>% as.data.frame() %>% rownames_to_column(var="ASV")
 
 # Merge taxonomy table with phyloseq object and filter by significant p-value
 galeeva_rare_res <- isa_galeeva_rare$sign %>%
