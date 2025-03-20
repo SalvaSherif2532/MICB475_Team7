@@ -5,6 +5,19 @@
 #### Updates
 * Going forward we will have a meeting chair (in charge of agenda, keeping meeting on time, and taking meeting minutes) --> today it's Rana (me!)
 
+### March 20, 2025 - Norman
+* Conclusions about alpha and beta diversity
+* Glom to genus level for the rarefied core microbiome and ISA
+* Lessened prevalence to 0.5 because we don't want to be more stringent
+  * We want to train the model more
+* Can do a histogram for ISA
+  * Multiple histograms: X-axis is severe and nonsevere then counts for the indicator species analysis
+  * Keep Y-axis consistent
+* Random forest model
+  * Definitely not overfitting the model
+  * Bessie will ask around if it's normal
+  * Veillonella and Prevotella are top 2 predictor variables that are also unique to the core microbiome of severe patients
+
 ### March 13, 2025 Agenda - Melika
 * Determine threshold/cutoff for the DESeq analysis
 * Taxa bar plots and DESeq analysis both show that there is a difference in abundance between swab and sputum - might not combine
