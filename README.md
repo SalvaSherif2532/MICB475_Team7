@@ -5,6 +5,25 @@
 #### Updates
 * Going forward we will have a meeting chair (in charge of agenda, keeping meeting on time, and taking meeting minutes) --> today it's Rana (me!)
 
+### March 27, 2025 Agenda
+* Talk about beta diversity permanova
+  * All are significant for galeeva
+  * Weighted unifrac wasn't significant for sputum vs swab
+* Will not put the model in the presentation because it wasn't talked about in Evelyn's modules
+* Last thing to do - use predictive model on al momani
+* Permanova will be incorporated into the beta diversity plot
+* Slides
+  * Alpha diversity - Pielou's Evenness and Richness
+  * Beta diversity - Bray-Curtis and Weighted Unifrac (to show phylogenetic diversity)
+  * One slide for biological interpretation - Rana
+  * Intro slide - Josh
+  * DESeq slide (histogram) - Norman will glom it and we will add colour to it. We will add a line for the threshold and box the genera we care about.
+  * Future Direction slide
+  * Limitations slide
+  * Will meet on friday to make the slides
+* Ask Bessie how to edit colour palette
+* Salva will rerun random forest model
+
 ### March 20, 2025 - Norman
 * Conclusions about alpha and beta diversity
 * Glom to genus level for the rarefied core microbiome and ISA
