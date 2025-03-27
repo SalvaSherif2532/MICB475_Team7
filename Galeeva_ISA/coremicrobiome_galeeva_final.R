@@ -5,8 +5,11 @@ library(ggVennDiagram)
 
 galeeva_final_CM <- readRDS("galeeva_final.rds")
 
+#Glom to genus level
+galeeva_final_genus <- tax_glom(galeeva_rare_CM, "Genus", NArm = FALSE)
+
 # Convert to relative abundance
-galeeva_final_RA <- transform_sample_counts(galeeva_final_CM, fun=function(x) x/sum(x))
+galeeva_final_RA <- transform_sample_counts(galeeva_final_genus, fun=function(x) x/sum(x))
 
 # Subset dataset into treatment and control groups
 galeeva_final_nonsevere <- subset_samples(galeeva_final_RA, `inpatient`=="Ambulatory treatment")
