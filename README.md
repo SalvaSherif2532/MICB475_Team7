@@ -6,23 +6,49 @@
 * Going forward we will have a meeting chair (in charge of agenda, keeping meeting on time, and taking meeting minutes) --> today it's Rana (me!)
 
 ### March 27, 2025 Agenda
+* Manuscript Planning
+  *  Table 1 --> demographics for Methods section (before and after rarefy)
+  *  Fig 1 --> Panel A: Galeeva Faith's ADD SIGNIFICANCE, B: Galeeva Pielou's, C: Galeeva observed
+     * Panel D|E|F same thing on Al-Momani severity
+  * Fig 2 --> Panel A: Galeeva Bray-Curtis, B: Galeeva Unweighted (regular unifrac)
+     * Panel C|D same thing Al-Momani severity
+  * Table 2 --> Indicator taxa (hopefully ~10) Galeeva UNRAREFIED --> what the model will be built on
+  * Fig 3 --> Panel A: Volcano DESeq2 NO COLOUR CODE VOLCANO< COLOUR CODE HISTOGRAM (if overlap, colour-coded ISA) UNRAREFIED
+  * Fig 4 --> Core microbiome UNRAREFIED --> can overlap name of taxa on ven diagram still colour code or asterik for ISA, don't bother for shared
+  * Fig 5 --> Panel A: AUC, B: importance histogram
+  * Testing Al-Momani will just print out a precentage that we will put in results
+  * SUPPLEMENTAL
+     * Sup Fig 1: a: swab sputum 1 of alpha, b: beta, c: taxa bar plot
+     * Sup Fig 2:  all the beta diversities for Galeeva we didn't show
+* METHODS
+  * data set overview (this is where we got dataset...)
+  * include parameters of rarefy, core microbiome, etc. --> base off previous UJEMI papaers
 * Talk about beta diversity permanova
+     * change "non-severe" to "less severe"
+     * Keep colours red for "severe"
   * All are significant for galeeva
   * Weighted unifrac wasn't significant for sputum vs swab
+  * Don't include Al-Momani at all in presentation
+  * For permanova we can still trust the p-value --> totally fine because we are only comparing 2 groups
 * Will not put the model in the presentation because it wasn't talked about in Evelyn's modules
 * Last thing to do - use predictive model on al momani
 * Permanova will be incorporated into the beta diversity plot
+* NOTE: WE SHOULD RUN THE SAME ALPHA AND BETA ON SEVERITY ON AL-MOMANI (JUST DO PIELOUS AND ALL THE BETA DIVERSITIES) --> DISCLUDE HEALTHY CONTROLS
 * Slides
   * Alpha diversity - Pielou's Evenness and Richness
   * Beta diversity - Bray-Curtis and Weighted Unifrac (to show phylogenetic diversity)
   * One slide for biological interpretation - Rana
   * Intro slide - Josh
   * DESeq slide (histogram) - Norman will glom it and we will add colour to it. We will add a line for the threshold and box the genera we care about.
-  * Future Direction slide
-  * Limitations slide
+     * less stringent is a bit weird but hopefully with glom it'll decrease
+     * Colour code the overlapping genus so we can tell a story
+        * colour code the same on DESeq2 & Core Microbiome
+  * Future Direction slide (PUT RF MODEL IN ONGOING DIRECTIONS/WORK BUT STILL HAVE SEPARATE IDEAS FOR FUTURE TEAMS)
+  * Limitations slide **(NO DO NOT INCLUDE NOT ON RUBRIC)**
   * Will meet on friday to make the slides
 * Ask Bessie how to edit colour palette
 * Salva will rerun random forest model
+  * yes run model on 10 that are ISA (non-rarefied, not glommed, keep higher than 0.7 stat on ISA)
 
 ### March 20, 2025 - Norman
 * Conclusions about alpha and beta diversity
