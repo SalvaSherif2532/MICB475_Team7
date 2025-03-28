@@ -8,16 +8,21 @@ library(vegan)
 library(ape)
 library(picante)
 library(ggsignif)
-
+library(ggpubr)
 
 #### Load in RData ####
 load("galeeva_rare.RData")
 load("galeeva_final.RData")
-
+galeeva_rare <- readRDS("galeeva_rare.rds")
+  
 otu_table(galeeva_rare)
 sample_data(galeeva_rare)
 tax_table(galeeva_rare)
 phy_tree(galeeva_rare)
+
+# Convert to factor and set levels
+galeeva_rare@sam_data$inpatient <- factor(galeeva_rare@sam_data$inpatient, 
+                                          levels = c("Ambulatory treatment", "Hospitalized"))
 
 #### Shannon's Diversity Index ######
 
@@ -26,9 +31,26 @@ plot_richness(galeeva_rare)
 
 plot_richness(galeeva_rare, measures = "Shannon") 
 
-gg_shannon_diversity <- plot_richness(galeeva_rare, x = "inpatient", measures = "Shannon") +
-  xlab("COVID-19 Severity") +
-  geom_boxplot() 
+gg_shannon_diversity <- plot_richness(galeeva_rare, x = "inpatient", measures = "Shannon", color = "inpatient") +
+  xlab("COVID-19 Severity") + theme_minimal() + 
+  geom_boxplot() + 
+  stat_compare_means(method = "wilcox.test", label.y.npc = "top", label.x.npc = "centre", vjust = 1, hjust = 0.5, size = 3.5) + 
+  scale_color_manual(
+    values = c("Ambulatory treatment" = "#00BFC4",  # Blue
+               "Hospitalized" = "#F8766D"),         # Red
+    labels = c("Ambulatory treatment" = "Less severe", 
+               "Hospitalized" = "Severe")
+  ) +
+  guides(color = "none") +  # Remove color legend
+  scale_x_discrete(labels = c("Ambulatory treatment" = "Less severe", 
+                              "Hospitalized" = "Severe")) +  # Rename x-axis titles
+  theme(
+    axis.title.x = element_text(size = 14),
+    axis.title.y = element_text(size = 14),
+    plot.title = element_text(size = 14),
+    strip.text = element_text(size = 14),    # Change size of the measures text
+  )
+
 gg_shannon_diversity
 
 ggsave(filename = "galeeva_Shannon_diversity.png"
@@ -75,10 +97,26 @@ phylo_dist <- pd(t(otu_table(galeeva_rare)), phy_tree(galeeva_rare),
 sample_data(galeeva_rare)$PD <- phylo_dist$PD
 
 # plot any metadata category against the PD
-plot.pd <- ggplot(sample_data(galeeva_rare), aes(inpatient, PD)) + 
-  geom_boxplot() +
+plot.pd <- ggplot(sample_data(galeeva_rare), aes(inpatient, PD, color = inpatient)) + 
+  geom_boxplot(fill = "white") +
   xlab("COVID-19 Severity") +
-  ylab("Phylogenetic Diversity")
+  ylab("Phylogenetic Diversity") + theme_minimal() + 
+  geom_boxplot() + 
+  stat_compare_means(method = "wilcox.test", label.y.npc = "top", label.x.npc = "centre", vjust = 1, hjust = 0.5, size = 3.5) + 
+  scale_color_manual(
+    values = c("Ambulatory treatment" = "#00BFC4",  # Blue
+               "Hospitalized" = "#F8766D"),         # Red
+    labels = c("Ambulatory treatment" = "Less severe", 
+               "Hospitalized" = "Severe")
+  ) +
+  guides(color = "none") +  # Remove color legend
+  scale_x_discrete(labels = c("Ambulatory treatment" = "Less severe", 
+                              "Hospitalized" = "Severe")) +  # Rename x-axis titles
+  theme(
+    axis.title.x = element_text(size = 14),
+    axis.title.y = element_text(size = 14),
+    plot.title = element_text(size = 14)
+  )
 
 # view plot
 plot.pd
@@ -91,9 +129,25 @@ ggsave(filename = "galeeva_phylogenetic_diversity.png"
 
 plot_richness(galeeva_rare, measures = "Observed") 
 
-gg_richness <- plot_richness(galeeva_rare, x = "inpatient", measures = "Observed") +
-  xlab("COVID-19 Severity") +
-  geom_boxplot() 
+gg_richness <- plot_richness(galeeva_rare, x = "inpatient", measures = "Observed", color = "inpatient") +
+  xlab("COVID-19 Severity") + theme_minimal() + 
+  geom_boxplot() + 
+  stat_compare_means(method = "wilcox.test", label.y.npc = "top", label.x.npc = "centre", vjust = 1, hjust = 0.5, size = 3.5) + 
+  scale_color_manual(
+    values = c("Ambulatory treatment" = "#00BFC4",  # Blue
+               "Hospitalized" = "#F8766D"),         # Red
+    labels = c("Ambulatory treatment" = "Less severe", 
+               "Hospitalized" = "Severe")
+  ) +
+  guides(color = "none") +  # Remove color legend
+  scale_x_discrete(labels = c("Ambulatory treatment" = "Less severe", 
+                              "Hospitalized" = "Severe")) +  # Rename x-axis titles
+  theme(
+    axis.title.x = element_text(size = 14),
+    axis.title.y = element_text(size = 14),
+    plot.title = element_text(size = 14),
+    strip.text = element_text(size = 14),    # Change size of the measures text
+  )
 gg_richness
 
 ggsave(filename = "galeeva_richness.png"
@@ -132,14 +186,31 @@ pielou_evenness <- shannon_diversity / log(species_richness)
 # Add Pielou's Evenness to the sample data
 samp_dat <- sample_data(galeeva_rare)
 samp_dat_wdiv <- data.frame(samp_dat, alphadiv, PielouEvenness = pielou_evenness)
-
+samp_dat_wdiv$inpatient <- factor(samp_dat_wdiv$inpatient, 
+                                          levels = c("Ambulatory treatment", "Hospitalized"))
 # Visualize Pielou's Evenness for different 'inpatient' categories
 gg_pielou_evenness <- samp_dat_wdiv %>%
   filter(!is.na(PielouEvenness)) %>%
-  ggplot(aes(x = inpatient, y = PielouEvenness)) +
+  ggplot(aes(x = inpatient, y = PielouEvenness, color = inpatient)) +
   geom_boxplot() +
   xlab("COVID-19 Severity") +
-  ylab("Pielou's Evenness")
+  ylab("Pielou's Evenness") + 
+  theme_minimal() + 
+  stat_compare_means(method = "wilcox.test", label.y.npc = "top", label.x.npc = "centre", vjust = 1, hjust = 0.5, size = 3.5) + 
+  scale_color_manual(
+    values = c("Ambulatory treatment" = "#00BFC4",  # Blue
+               "Hospitalized" = "#F8766D"),         # Red
+    labels = c("Ambulatory treatment" = "Less severe", 
+               "Hospitalized" = "Severe")
+  ) +
+  guides(color = "none") +  # Remove color legend
+  scale_x_discrete(labels = c("Ambulatory treatment" = "Less severe", 
+                              "Hospitalized" = "Severe")) + 
+  theme(
+    axis.title.x = element_text(size = 14),
+    axis.title.y = element_text(size = 14),
+    plot.title = element_text(size = 14)
+  )
 
 # Print the plot
 gg_pielou_evenness
