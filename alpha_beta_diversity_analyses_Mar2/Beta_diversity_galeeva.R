@@ -5,7 +5,7 @@ library(tidyverse)
 library(picante)
 load("galeeva_rare.RData")
 load("galeeva_final.RData")
-bc_dm <- distance(galeeva_rare, method="bray")
+bc_dm <- distance(gal_df, method="bray")
 # check which methods you can specify
 ?distance
 
@@ -14,7 +14,13 @@ pcoa_bray_bc <- ordinate(galeeva_rare, method="PCoA", distance=bc_dm)
 plot_ordination(galeeva_rare, pcoa_bray_bc, color = "inpatient")
 
 gg_bray_pcoa <- plot_ordination(galeeva_rare,  pcoa_bray_bc, color = "inpatient") +
-  labs(col="Severity")
+  labs(col="Severity") + theme_minimal() + scale_color_manual(
+    name = "Severity",
+    values = c("Ambulatory treatment" = "#00BFC4",  # switch to blue
+               "Hospitalized" = "#F8766D"),         # switch to red
+    labels = c("Ambulatory treatment" = "Less severe", 
+               "Hospitalized" = "Severe")
+  )
 gg_bray_pcoa
 
 ggsave("plot_bray_pcoa_galeeva.png"
@@ -29,12 +35,19 @@ pcoa_jaccard_bc <- ordinate(galeeva_rare, method="PCoA", distance=jaccard_dm)
 plot_ordination(galeeva_rare, pcoa_jaccard_bc, color = "inpatient")
 
 gg_jaccard_pcoa <- plot_ordination(galeeva_rare, pcoa_jaccard_bc, color = "inpatient") +
-  labs(col="Severity")
+  labs(col="Severity") + theme_minimal() + scale_color_manual(
+    name = "Severity",
+    values = c("Ambulatory treatment" = "#00BFC4",  # switch to blue
+               "Hospitalized" = "#F8766D"),         # switch to red
+    labels = c("Ambulatory treatment" = "Less severe", 
+               "Hospitalized" = "Severe")
+  )
 gg_jaccard_pcoa
 
 ggsave("plot_jaccard_galeeva.png"
        , gg_jaccard_pcoa
        , height=4, width=5)
+
 #wunifrac
 wunifrac_dm <- distance(galeeva_rare, method="wunifrac")
 # check which methods you can specify
@@ -43,12 +56,19 @@ pcoa_wunifrac_bc <- ordinate(galeeva_rare, method="PCoA", distance= wunifrac_dm)
 plot_ordination(galeeva_rare, pcoa_wunifrac_bc, color = "inpatient")
 
 gg_wunifrac_pcoa <- plot_ordination(galeeva_rare, pcoa_wunifrac_bc, color = "inpatient") +
-  labs(col="Severity")
+  labs(col="Severity") + theme_minimal() + scale_color_manual(
+    name = "Severity",
+    values = c("Ambulatory treatment" = "#00BFC4",  # switch to blue
+               "Hospitalized" = "#F8766D"),         # switch to red
+    labels = c("Ambulatory treatment" = "Less severe", 
+               "Hospitalized" = "Severe")
+  )
 gg_wunifrac_pcoa
 
 ggsave("plot_wunifrac_pcoa_galeeva.png"
        , gg_wunifrac_pcoa
        , height=4, width=5)
+
 #unifrac
 unifrac_dm <- distance(galeeva_rare, method="unifrac")
 # check which methods you can specify
@@ -57,7 +77,13 @@ pcoa_unifrac_bc <- ordinate(galeeva_rare, method="PCoA", distance= unifrac_dm)
 plot_ordination(galeeva_rare, pcoa_unifrac_bc, color = "inpatient")
 
 gg_unifrac_pcoa <- plot_ordination(galeeva_rare, pcoa_unifrac_bc, color = "inpatient") +
-  labs(col="Severity")
+  labs(col="Severity") + theme_minimal() + scale_color_manual(
+    name = "Severity",
+    values = c("Ambulatory treatment" = "#00BFC4",  # switch to blue
+               "Hospitalized" = "#F8766D"),         # switch to red
+    labels = c("Ambulatory treatment" = "Less severe", 
+               "Hospitalized" = "Severe")
+  )
 gg_unifrac_pcoa
 
 ggsave("plot_unifrac_pcoa_galeeva.png"
