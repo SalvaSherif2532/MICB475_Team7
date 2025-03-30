@@ -39,7 +39,7 @@ galeeva_vol_plot <- galeeva_res %>%
 galeeva_vol_plot
 
 ## Save volcano plot ##
-ggsave(filename="DESeq2_Mar9/galeeva_vol_plot.png",galeeva_vol_plot)
+# ggsave(filename="DESeq2_Mar9/galeeva_vol_plot.png",galeeva_vol_plot)
 
 ## Filter padj and rename 'row' to 'ASV' ##
 galeeva_sigASVs <- galeeva_res %>% 
@@ -47,27 +47,46 @@ galeeva_sigASVs <- galeeva_res %>%
   dplyr::rename(ASV=row)
 View(galeeva_sigASVs)
 
+## Filter Genus ##
+galeeva_sigASVs_filtered <- galeeva_sigASVs %>%
+  filter(!Genus %in% c("g__uncultured",
+                       "g__Allorhizobium-Neorhizobium-Pararhizobium-Rhizobium",
+                       "g__TM7x",
+                       "g__F0058",
+                       "g__Escherichia-Shigella"))
+view(galeeva_sigASVs_filtered)
+
 ## Get only ASV names ##
-galeeva_sigASVs_vec <- galeeva_sigASVs %>%
+galeeva_sigASVs_vec <- galeeva_sigASVs_filtered %>%
   pull(ASV)
 
 ## Prune phyloseq file ##
 galeeva_DESeq <- prune_taxa(galeeva_sigASVs_vec, galeeva_glom)
 galeeva_sigASVs <- tax_table(galeeva_DESeq) %>% as.data.frame() %>%
   rownames_to_column(var="ASV") %>%
-  right_join(galeeva_sigASVs) %>%
+  right_join(galeeva_sigASVs_filtered) %>%
   arrange(log2FoldChange) %>%
   mutate(Genus = make.unique(Genus)) %>%
   mutate(Genus = factor(Genus, levels=unique(Genus)))
 
-## Make plot of sigASVs ##
-galeeva_sigASVs_plot <- ggplot(galeeva_sigASVs) +
-  geom_bar(aes(x=Genus, y=log2FoldChange), stat="identity")+
-  geom_errorbar(aes(x=Genus, ymin=log2FoldChange-lfcSE, ymax=log2FoldChange+lfcSE)) +
-  theme(axis.text.x = element_text(angle=90, hjust=1, vjust=0.5, size = 5),
-        axis.text.y = element_text(size = 5),
-        axis.title = element_text(size = 8))
+## Define the genera to highlight ##
+highlighted_genera <- c("g__Prevotella", "g__Veillonella", "g__Streptococcus", "g__Actinomyces", "g__Enterococcus")
+
+## Modify the Genus column to reflect whether it is in the highlighted genera ##
+galeeva_sigASVs_filtered$highlighted <- ifelse(galeeva_sigASVs_filtered$Genus %in% highlighted_genera, "TRUE", "FALSE")
+
+## Create the plot ##
+galeeva_sigASVs_plot <- ggplot(galeeva_sigASVs_filtered, 
+                               aes(x = Genus, y = log2FoldChange, fill = highlighted)) +
+  geom_bar(stat = "identity", color = "black") +
+  geom_errorbar(aes(ymin = log2FoldChange - lfcSE, ymax = log2FoldChange + lfcSE)) +
+  scale_fill_manual(values = c("TRUE" = "red", "FALSE" = "gray")) +
+  geom_hline(yintercept = 1.5, linetype = "dashed", color = "darkgreen", size = 2) +
+  geom_hline(yintercept = -1.5, linetype = "dashed", color = "darkgreen", size = 2) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 12),
+        axis.title = element_text(size = 16),
+        legend.position = "none")
 galeeva_sigASVs_plot
 
 ## Save sigASVs plot ##
-ggsave(filename="DESeq2_Mar9/galeeva_sigASVs_plot.png", galeeva_sigASVs_plot)
+ggsave(filename="DESeq2_Mar9/galeeva_sigASVs_filtered_plot.png", galeeva_sigASVs_plot, width = 12, height = 9, dpi = 300)
