@@ -70,7 +70,7 @@ galeeva_sigASVs <- tax_table(galeeva_DESeq) %>% as.data.frame() %>%
   mutate(Genus = factor(Genus, levels=unique(Genus)))
 
 ## Define the genera to highlight ##
-highlighted_genera <- c("g__Prevotella", "g__Veillonella", "g__Streptococcus", "g__Actinomyces", "g__Enterococcus")
+highlighted_genera <- c("g__Prevotella", "g__Veillonella", "g__Streptococcus", "g__Actinomyces", "g__Enterococcus", "g__Dolosigranulum", "g__Lawsonella", "g__Corynebacterium")
 
 ## Modify the Genus column to reflect whether it is in the highlighted genera ##
 galeeva_sigASVs_filtered$highlighted <- ifelse(galeeva_sigASVs_filtered$Genus %in% highlighted_genera, "TRUE", "FALSE")
