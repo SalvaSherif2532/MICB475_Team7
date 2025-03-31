@@ -70,7 +70,7 @@ galeeva_sigASVs <- tax_table(galeeva_DESeq) %>% as.data.frame() %>%
   mutate(Genus = factor(Genus, levels=unique(Genus)))
 
 ## Define the genera to highlight ##
-highlighted_genera <- c("g__Prevotella", "g__Veillonella", "g__Streptococcus", "g__Actinomyces", "g__Enterococcus", "g__Dolosigranulum", "g__Lawsonella", "g__Corynebacterium")
+highlighted_genera <- c("g__Prevotella", "g__Veillonella", "g__Streptococcus", "g__Actinomyces", "g__Dolosigranulum", "g__Lawsonella", "g__Corynebacterium")
 
 ## Modify the Genus column to reflect whether it is in the highlighted genera ##
 galeeva_sigASVs_filtered$highlighted <- ifelse(galeeva_sigASVs_filtered$Genus %in% highlighted_genera, "TRUE", "FALSE")
@@ -80,12 +80,23 @@ galeeva_sigASVs_plot <- ggplot(galeeva_sigASVs_filtered,
                                aes(x = Genus, y = log2FoldChange, fill = highlighted)) +
   geom_bar(stat = "identity", color = "black") +
   geom_errorbar(aes(ymin = log2FoldChange - lfcSE, ymax = log2FoldChange + lfcSE)) +
-  scale_fill_manual(values = c("TRUE" = "red", "FALSE" = "gray")) +
+  scale_fill_manual(values = c("TRUE" = "#F8766D", "FALSE" = "gray")) +
   geom_hline(yintercept = 1.5, linetype = "dashed", color = "darkgreen", size = 2) +
   geom_hline(yintercept = -1.5, linetype = "dashed", color = "darkgreen", size = 2) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 12),
         axis.title = element_text(size = 16),
         legend.position = "none")
+galeeva_sigASVs_plot
+
+## Create the plot (for presentation) ##
+galeeva_sigASVs_plot <- ggplot(galeeva_sigASVs_filtered) +
+  geom_bar(aes(x=Genus, y=log2FoldChange), stat="identity", fill = "gray", color = "black") +
+  geom_errorbar(aes(x=Genus, ymin=log2FoldChange-lfcSE, ymax=log2FoldChange+lfcSE)) +
+  geom_hline(yintercept = 1, linetype = "dashed", color = "darkgreen", size = 1) +   # First dashed line at y = 1
+  geom_hline(yintercept = -1, linetype = "dashed", color = "darkgreen", size = 1) +  # Second dashed line at y = -1
+  theme(axis.text.x = element_text(angle=90, hjust=1, vjust=0.5, size = 12),
+        axis.text.y = element_text(size = 12),
+        axis.title = element_text(size = 16))
 galeeva_sigASVs_plot
 
 ## Save sigASVs plot ##
