@@ -11,8 +11,8 @@ library(ggsignif)
 library(ggpubr)
 
 #### Load in RData ####
-load("galeeva_rare.RData")
-load("galeeva_final.RData")
+# load("galeeva_rare.RData")
+# load("galeeva_final.RData")
 galeeva_rare <- readRDS("galeeva_rare.rds")
   
 otu_table(galeeva_rare)
@@ -124,6 +124,18 @@ plot.pd
 ggsave(filename = "galeeva_phylogenetic_diversity.png"
        , plot.pd
        , height=6, width=4)
+
+# Run Wilcoxon test to compare PD between levels of Host_disease
+
+phylo_distance_df <- data.frame(sample_data(galeeva_rare))
+
+head(phylo_distance_df)
+
+wilcox_test_result <- wilcox.test(PD ~ inpatient, data = phylo_distance_df)
+
+# Print the result of the test
+print(wilcox_test_result)
+
 
 #### Richness ####
 
