@@ -7,19 +7,19 @@
 
 ### March 27, 2025 Agenda
 * Manuscript Planning
-  *  Table 1 --> demographics for Methods section (before and after rarefy)
-  *  Fig 1 --> Panel A: Galeeva Faith's ADD SIGNIFICANCE, B: Galeeva Pielou's, C: Galeeva observed
+  *  Table 1 (RANA) --> demographics for Methods section (before and after rarefy)
+  *  Fig 1 (RANA) --> Panel A: Galeeva Faith's ADD SIGNIFICANCE, B: Galeeva Pielou's, C: Galeeva observed
      * Panel D|E|F same thing on Al-Momani severity
-  * Fig 2 --> Panel A: Galeeva Bray-Curtis, B: Galeeva Unweighted (regular unifrac)
+  * Fig 2 (MELIKA) --> Panel A: Galeeva Bray-Curtis, B: Galeeva Unweighted (regular unifrac)
      * Panel C|D same thing Al-Momani severity
-  * Table 2 --> Indicator taxa (hopefully ~10) Galeeva UNRAREFIED --> what the model will be built on
-  * Fig 3 --> Panel A: Volcano DESeq2 NO COLOUR CODE VOLCANO< COLOUR CODE HISTOGRAM (if overlap, colour-coded ISA) UNRAREFIED
-  * Fig 4 --> Core microbiome UNRAREFIED --> can overlap name of taxa on ven diagram still colour code or asterik for ISA, don't bother for shared
-  * Fig 5 --> Panel A: AUC, B: importance histogram
+  * Table 2 (JOSH) --> Indicator taxa (hopefully ~10) Galeeva UNRAREFIED --> what the model will be built on
+  * Fig 3 (NORMAN) --> Panel A: Volcano DESeq2 NO COLOUR CODE VOLCANO< COLOUR CODE HISTOGRAM (if overlap, colour-coded ISA) UNRAREFIED
+  * Fig 4 (JOSH) --> Core microbiome UNRAREFIED --> can overlap name of taxa on ven diagram still colour code or asterik for ISA, don't bother for shared
+  * Fig 5 (SALVA) --> Panel A: AUC, B: importance histogram
   * Testing Al-Momani will just print out a precentage that we will put in results
   * SUPPLEMENTAL
-     * Sup Fig 1: a: swab sputum 1 of alpha, b: beta, c: taxa bar plot
-     * Sup Fig 2:  all the beta diversities for Galeeva we didn't show
+     * Sup Fig 1 (um 3 ppl later): a: swab sputum 1 of alpha, b: beta, c: taxa bar plot
+     * Sup Fig 2 (Melika later):  all the beta diversities for Galeeva we didn't show
 * METHODS
   * data set overview (this is where we got dataset...)
   * include parameters of rarefy, core microbiome, etc. --> base off previous UJEMI papaers
