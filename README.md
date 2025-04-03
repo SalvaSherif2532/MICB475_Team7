@@ -5,6 +5,14 @@
 #### Updates
 * Going forward we will have a meeting chair (in charge of agenda, keeping meeting on time, and taking meeting minutes) --> today it's Rana (me!)
 
+### April 3, 2025 - Salva
+* Salva will run the model on Al-Momani dataset
+* Group will schedule a meeting with Bessie next week to discuss
+* Use the checklist for the manuscript
+* Teaching evaluations will be filled out
+* Feedback formatting can be provided by Bessie
+* Hans recommended to use violin plots for alpha diversity to see better dispersion
+
 ### March 27, 2025 Agenda
 * Manuscript Planning
   *  Table 1 (RANA) --> demographics for Methods section (before and after rarefy)
@@ -16,7 +24,7 @@
   * Fig 3 (NORMAN) --> Panel A: Volcano DESeq2 NO COLOUR CODE VOLCANO< COLOUR CODE HISTOGRAM (if overlap, colour-coded ISA) UNRAREFIED
   * Fig 4 (JOSH) --> Core microbiome UNRAREFIED --> can overlap name of taxa on ven diagram still colour code or asterik for ISA, don't bother for shared
   * Fig 5 (SALVA) --> Panel A: AUC, B: importance histogram
-  * Testing Al-Momani will just print out a precentage that we will put in results
+  * Testing Al-Momani will just print out a precentage that we will put in results - also put information about the model
   * SUPPLEMENTAL
      * Sup Fig 1 (um 3 ppl later): a: swab sputum 1 of alpha, b: beta, c: taxa bar plot
      * Sup Fig 2 (Melika later):  all the beta diversities for Galeeva we didn't show
