@@ -102,19 +102,18 @@ phylo_dist <- pd(t(otu_table(almomani_rare_sputum_no_control)), phy_tree(almoman
 sample_data(almomani_rare_sputum_no_control)$PD <- phylo_dist$PD
 
 # plot any metadata category against the PD
-plot.pd <- ggplot(sample_data(almomani_rare_sputum_no_control), aes(Host_disease, PD, color = Host_disease)) + 
-  geom_boxplot(fill = "white") +
+plot.pd <- ggplot(sample_data(almomani_rare_sputum_no_control), aes(Host_disease, PD, fill = Host_disease)) + 
+  geom_violin(colour = "black", trim = FALSE) +
   xlab("COVID-19 Severity") +
   ylab("Phylogenetic Diversity") + theme_minimal() + 
-  geom_boxplot() + 
-  stat_compare_means(method = "wilcox.test", label.y.npc = "top", label.x.npc = "centre", vjust = 1, hjust = 0.5, size = 3.5) + 
-  scale_color_manual(
+  stat_compare_means(method = "wilcox.test", label.y.npc = "top", label.x.npc = "centre", vjust = 0.2, hjust = 0.5, size = 3.5) + 
+  scale_fill_manual(
     values = c("Covid" = "#00BFC4",  # Blue
                "ICU" = "#F8766D"),         # Red
     labels = c("Covid" = "Less severe", 
                "ICU" = "Severe")
   ) +
-  guides(color = "none") +  # Remove color legend
+  guides(fill = "none") +  # Remove color legend
   scale_x_discrete(labels = c("Covid" = "Less severe", 
                               "ICU" = "Severe")) +  # Rename x-axis titles
   theme(
@@ -146,24 +145,25 @@ print(wilcox_test_result)
 
 plot_richness(almomani_rare_sputum_no_control, measures = "Observed") 
 
-almomani_richness <- plot_richness(almomani_rare_sputum_no_control, x = "Host_disease", measures = "Observed", color = "Host_disease") +
+almomani_richness <- plot_richness(almomani_rare_sputum_no_control, x = "Host_disease", measures = "Observed") +
   xlab("COVID-19 Severity") +
   theme_minimal() + 
-  geom_boxplot() + 
-  stat_compare_means(method = "wilcox.test", label.y.npc = "top", label.x.npc = "centre", vjust = 1, hjust = 0.5, size = 3.5) + 
-  scale_color_manual(
+  geom_violin(aes(fill = Host_disease), trim = FALSE) + 
+  stat_compare_means(method = "wilcox.test", label.y.npc = "top", label.x.npc = "centre", vjust = 0.5, hjust = 0.5, size = 3.5) + 
+  scale_fill_manual(
     values = c("Covid" = "#00BFC4",  # Blue
                "ICU" = "#F8766D"),         # Red
     labels = c("Covid" = "Less severe", 
                "ICU" = "Severe")
   ) +
-  guides(color = "none") +  # Remove color legend
+  guides(fill = "none") +  # Remove color legend
   scale_x_discrete(labels = c("Covid" = "Less severe", 
                               "ICU" = "Severe")) +  # Rename x-axis titles
   theme(
     axis.title.x = element_text(size = 14),
     axis.title.y = element_text(size = 14),
-    plot.title = element_text(size = 14)
+    plot.title = element_text(size = 14),
+    strip.text = element_text(size = 14)
   )
 
 almomani_richness
@@ -208,19 +208,19 @@ samp_dat_wdiv <- data.frame(samp_dat, alphadiv, PielouEvenness = pielou_evenness
 # Visualize Pielou's Evenness for different 'env_medium' categories
 gg_pielou_evenness <- samp_dat_wdiv %>%
   filter(!is.na(PielouEvenness)) %>%
-  ggplot(aes(x = Host_disease, y = PielouEvenness, color = Host_disease)) +
-  geom_boxplot() +
+  ggplot(aes(x = Host_disease, y = PielouEvenness, fill = Host_disease)) +
+  geom_violin(colour = "black", trim = FALSE) +
   xlab("COVID-19 Severity") +
   ylab("Pielou's Evenness") + 
   theme_minimal() + 
-  stat_compare_means(method = "wilcox.test", label.y.npc = "top", label.x.npc = "centre", vjust = 1, hjust = 0.5, size = 3.5) + 
-  scale_color_manual(
+  stat_compare_means(method = "wilcox.test", label.y.npc = "top", label.x.npc = "centre", vjust = 0.05, hjust = 0.5, size = 3.5) + 
+  scale_fill_manual(
     values = c("Covid" = "#00BFC4",  # Blue
                "ICU" = "#F8766D"),         # Red
     labels = c("Covid" = "Less severe", 
                "ICU" = "Severe")
   ) +
-  guides(color = "none") +  # Remove color legend
+  guides(fill = "none") +  # Remove color legend
   scale_x_discrete(labels = c("Covid" = "Less severe", 
                               "ICU" = "Severe")) + 
   theme(
@@ -234,6 +234,7 @@ gg_pielou_evenness
 
 # Save the plot if needed
 ggsave(filename = "almomani_severity_pielou_evenness.png", gg_pielou_evenness, height = 6, width = 4)
+
 
 ## Calculate stats for Pielou evenness ##
 
