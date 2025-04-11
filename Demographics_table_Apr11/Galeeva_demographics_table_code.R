@@ -26,6 +26,15 @@ data_table <- as(sample_data(galeeva_final), "data.frame") |>
   mutate(AGE = as.numeric(AGE)) |>
   glimpse()
 
+# Get COVID-19 severity #
+sum(!is.na(data_table$inpatient))
+
+number_severe = sum(data_table$inpatient == "Hospitalized")
+number_severe
+
+number_less_severe = sum(data_table$inpatient == "Ambulatory treatment")
+number_less_severe
+
 # Get age values #
 nrow(data_table) # 331 samples total
 sum(!is.na(data_table$AGE)) # 327 of 331 ppls age is reported 
@@ -214,6 +223,15 @@ data_table_rare <- as(sample_data(galeeva_rare), "data.frame") |>
                 ~na_if(as.character(.x), "missing"))) |> #changing "missing" values to NAs
   mutate(AGE = as.numeric(AGE)) |>
   glimpse()
+
+# Get COVID-19 severity #
+sum(!is.na(data_table_rare$inpatient))
+
+number_severe_rare = sum(data_table_rare$inpatient == "Hospitalized")
+number_severe_rare
+
+number_less_severe_rare = sum(data_table_rare$inpatient == "Ambulatory treatment")
+number_less_severe_rare
 
 # Get age values #
 nrow(data_table_rare) # 226 samples total
