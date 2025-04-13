@@ -10,7 +10,7 @@ library(DESeq2)
 galeeva_final <- readRDS("Datasets_RDS/galeeva_final.rds")
 
 ## glom ##
- galeeva_glom <- tax_glom(galeeva_final, taxrank = "Genus")
+galeeva_glom <- tax_glom(galeeva_final, taxrank = "Genus")
 
 ## DESeq ##
 # galeeva_deseq <- phyloseq_to_deseq2(galeeva_final, ~`inpatient`)
@@ -24,8 +24,15 @@ galeeva_res <- results(DESEQ_galeeva, tidy=TRUE,
                # this will ensure that No is your reference group
                contrast = c("inpatient","Hospitalized","Ambulatory treatment"))
 
+taxtable <- tax_table(galeeva_final) %>% as.data.frame() %>% rownames_to_column(var="ASV")
+
+# Merge taxonomy table with phyloseq object and filter by significant p-value
+deseq_res_tax <- galeeva_res$row %>%
+  rownames_to_column(var="ASV") %>%
+  left_join(taxtable)
+
 ## Look at results ##
-View(galeeva_res)
+View(deseq_res_tax)
 
 ## Volcano plot: effect size VS significance ##
 ggplot(galeeva_res) +
