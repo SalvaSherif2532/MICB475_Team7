@@ -7,10 +7,10 @@ library(phyloseq)
 library(DESeq2)
 
 ## Load data ##
-load("alpha_beta_diversity_analyses_Mar2/galeeva_final.RData")
+readRDS("Datasets_RDS/galeeva_final.rds")
 
 ## glom ##
-galeeva_glom <- tax_glom(galeeva_final, taxrank = "Genus")
+ galeeva_glom <- tax_glom(galeeva_final, taxrank = "Genus")
 
 ## DESeq ##
 # galeeva_deseq <- phyloseq_to_deseq2(galeeva_final, ~`inpatient`)
