@@ -27,9 +27,9 @@ galeeva_res <- results(DESEQ_galeeva, tidy=TRUE,
 taxtable <- tax_table(galeeva_final) %>% as.data.frame() %>% rownames_to_column(var="ASV")
 
 # Merge taxonomy table with phyloseq object and filter by significant p-value
-deseq_res_tax <- galeeva_res$row %>%
-  rownames_to_column(var="ASV") %>%
-  left_join(taxtable)
+galeeva_res <- galeeva_res_deseq %>%
+  rename(ASV = row) %>%
+  left_join(taxtable, by = "ASV")
 
 ## Look at results ##
 View(deseq_res_tax)
