@@ -7,7 +7,7 @@ library(phyloseq)
 library(DESeq2)
 
 ## Load data ##
-readRDS("Datasets_RDS/galeeva_final.rds")
+galeeva_final <- readRDS("Datasets_RDS/galeeva_final.rds")
 
 ## glom ##
  galeeva_glom <- tax_glom(galeeva_final, taxrank = "Genus")
