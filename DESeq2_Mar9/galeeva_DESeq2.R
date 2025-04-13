@@ -24,11 +24,12 @@ galeeva_res_deseq <- results(DESEQ_galeeva, tidy=TRUE,
                # this will ensure that No is your reference group
                contrast = c("inpatient","Hospitalized","Ambulatory treatment"))
 
+# Extract taxonomy table
 taxtable <- tax_table(galeeva_final) %>% as.data.frame() %>% rownames_to_column(var="ASV")
 
 # Merge taxonomy table with phyloseq object and filter by significant p-value
 galeeva_res <- galeeva_res_deseq %>%
-  rename(ASV = row) %>%
+  dplyr::rename(ASV = row) %>%
   left_join(taxtable, by = "ASV")
 
 ## Look at results ##
@@ -42,16 +43,25 @@ ggplot(galeeva_res) +
 galeeva_vol_plot <- galeeva_res %>%
   mutate(significant = padj<0.01 & abs(log2FoldChange)>1.5) %>%
   ggplot() +
-  geom_point(aes(x=log2FoldChange, y=-log10(padj), col=significant))
+  geom_point(aes(x=log2FoldChange, y=-log10(padj), col=significant)) +
+  scale_color_manual(
+    name = "Severity",
+    values = c("TRUE" = "#f8766d", "FALSE" = "#00bfc4"),
+    labels = c("TRUE" = "Severe", "FALSE" = "Less severe")
+  ) +
+  theme(axis.text.x = element_text(size = 13),
+        axis.text.y = element_text(size = 13),
+        axis.title = element_text(size = 16),
+        legend.text = element_text(size = 13),
+        legend.title = element_text(size = 16))
 galeeva_vol_plot
 
 ## Save volcano plot ##
-# ggsave(filename="DESeq2_Mar9/galeeva_vol_plot.png",galeeva_vol_plot)
+ggsave(filename="DESeq2_Mar9/galeeva_vol_plot.png",galeeva_vol_plot, width = 9, height = 6, dpi = 300)
 
 ## Filter padj and rename 'row' to 'ASV' ##
 galeeva_sigASVs <- galeeva_res %>% 
-  filter(padj<0.01 & abs(log2FoldChange)>1.5) %>%
-  dplyr::rename(ASV=row)
+  filter(padj<0.01 & abs(log2FoldChange)>1.5)
 View(galeeva_sigASVs)
 
 ## Filter Genus ##
@@ -77,21 +87,45 @@ galeeva_sigASVs <- tax_table(galeeva_DESeq) %>% as.data.frame() %>%
   mutate(Genus = factor(Genus, levels=unique(Genus)))
 
 ## Define the genera to highlight ##
-highlighted_genera <- c("g__Prevotella", "g__Veillonella", "g__Streptococcus", "g__Actinomyces", "g__Dolosigranulum", "g__Lawsonella", "g__Corynebacterium")
+highlighted_genera <- c("g__Prevotella", "g__Veillonella", "g__Granulicatella", "g__Atopobium", "g__Lawsonella", "g__Corynebacterium")
 
 ## Modify the Genus column to reflect whether it is in the highlighted genera ##
 galeeva_sigASVs_filtered$highlighted <- ifelse(galeeva_sigASVs_filtered$Genus %in% highlighted_genera, "TRUE", "FALSE")
 
-## Create the plot ##
+# Remove "g__" prefix from Genus
+galeeva_sigASVs_filtered$Genus <- gsub("g__", "", galeeva_sigASVs_filtered$Genus)
+
+## Reorder by log2foldchange
+galeeva_sigASVs_filtered$Genus <- reorder(galeeva_sigASVs_filtered$Genus, galeeva_sigASVs_filtered$log2FoldChange)
+
+## Create the plot (flipped) ##
+galeeva_sigASVs_plot_flip <- ggplot(galeeva_sigASVs_filtered, 
+                               aes(x = Genus, y = log2FoldChange, fill = highlighted)) +
+  geom_bar(stat = "identity", color = "black") +
+  geom_errorbar(aes(ymin = log2FoldChange - lfcSE, ymax = log2FoldChange + lfcSE)) +
+  scale_fill_manual(values = c("TRUE" = "#9d0e0d", "FALSE" = "gray")) +
+  geom_hline(yintercept = 1.5, linetype = "dashed", color = "darkgreen", size = 1) +
+  geom_hline(yintercept = -1.5, linetype = "dashed", color = "darkgreen", size = 1) +
+  coord_flip() +
+  theme(axis.text.x = element_text(hjust = 0.5, vjust = 0.5, size = 13),
+        axis.text.y = element_text(size = 13),
+        axis.title = element_text(size = 16),
+        axis.title.y = element_text(angle = 0, vjust = 0.5),
+        legend.position = "none")
+galeeva_sigASVs_plot_flip
+
+## Create the plot (not flipped)
 galeeva_sigASVs_plot <- ggplot(galeeva_sigASVs_filtered, 
                                aes(x = Genus, y = log2FoldChange, fill = highlighted)) +
   geom_bar(stat = "identity", color = "black") +
   geom_errorbar(aes(ymin = log2FoldChange - lfcSE, ymax = log2FoldChange + lfcSE)) +
-  scale_fill_manual(values = c("TRUE" = "#F8766D", "FALSE" = "gray")) +
-  geom_hline(yintercept = 1.5, linetype = "dashed", color = "darkgreen", size = 2) +
-  geom_hline(yintercept = -1.5, linetype = "dashed", color = "darkgreen", size = 2) +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 12),
+  scale_fill_manual(values = c("TRUE" = "#9d0e0d", "FALSE" = "gray")) +
+  geom_hline(yintercept = 1.5, linetype = "dashed", color = "darkgreen", size = 1) +
+  geom_hline(yintercept = -1.5, linetype = "dashed", color = "darkgreen", size = 1) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 13),
+        axis.text.y = element_text(size = 13),
         axis.title = element_text(size = 16),
+        axis.title.y = element_text(angle = 90, vjust = 0.5),
         legend.position = "none")
 galeeva_sigASVs_plot
 
@@ -107,4 +141,5 @@ galeeva_sigASVs_plot <- ggplot(galeeva_sigASVs_filtered) +
 galeeva_sigASVs_plot
 
 ## Save sigASVs plot ##
+ggsave(filename="DESeq2_Mar9/galeeva_sigASVs_filtered_plot_flip.png", galeeva_sigASVs_plot_flip, width = 10, height = 11, dpi = 300)
 ggsave(filename="DESeq2_Mar9/galeeva_sigASVs_filtered_plot.png", galeeva_sigASVs_plot, width = 12, height = 9, dpi = 300)
