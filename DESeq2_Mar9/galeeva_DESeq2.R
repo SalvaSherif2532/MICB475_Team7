@@ -20,7 +20,7 @@ galeeva_glom <- tax_glom(galeeva_final, taxrank = "Genus")
 galeeva_plus1 <- transform_sample_counts(galeeva_glom, function(x) x+1)
 galeeva_deseq <- phyloseq_to_deseq2(galeeva_plus1, ~`inpatient`)
 DESEQ_galeeva <- DESeq(galeeva_deseq)
-galeeva_res <- results(DESEQ_galeeva, tidy=TRUE, 
+galeeva_res_deseq <- results(DESEQ_galeeva, tidy=TRUE, 
                # this will ensure that No is your reference group
                contrast = c("inpatient","Hospitalized","Ambulatory treatment"))
 
@@ -32,7 +32,7 @@ galeeva_res <- galeeva_res_deseq %>%
   left_join(taxtable, by = "ASV")
 
 ## Look at results ##
-View(deseq_res_tax)
+View(galeeva_res)
 
 ## Volcano plot: effect size VS significance ##
 ggplot(galeeva_res) +
