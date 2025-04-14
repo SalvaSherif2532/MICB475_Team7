@@ -49,6 +49,7 @@ galeeva_vol_plot <- galeeva_res %>%
     values = c("TRUE" = "#f8766d", "FALSE" = "#00bfc4"),
     labels = c("TRUE" = "Severe", "FALSE" = "Less severe")
   ) +
+  theme_minimal() +
   theme(axis.text.x = element_text(size = 13),
         axis.text.y = element_text(size = 13),
         axis.title = element_text(size = 16),
@@ -87,7 +88,7 @@ galeeva_sigASVs <- tax_table(galeeva_DESeq) %>% as.data.frame() %>%
   mutate(Genus = factor(Genus, levels=unique(Genus)))
 
 ## Define the genera to highlight ##
-highlighted_genera <- c("g__Prevotella", "g__Veillonella", "g__Granulicatella", "g__Atopobium", "g__Lawsonella", "g__Corynebacterium")
+highlighted_genera <- c("g__Prevotella", "g__Veillonella", "g__Granulicatella", "g__Atopobium", "g__Lawsonella", "g__Corynebacterium", "g__Staphylococcus")
 
 ## Modify the Genus column to reflect whether it is in the highlighted genera ##
 galeeva_sigASVs_filtered$highlighted <- ifelse(galeeva_sigASVs_filtered$Genus %in% highlighted_genera, "TRUE", "FALSE")
@@ -107,6 +108,7 @@ galeeva_sigASVs_plot_flip <- ggplot(galeeva_sigASVs_filtered,
   geom_hline(yintercept = 1.5, linetype = "dashed", color = "darkgreen", size = 1) +
   geom_hline(yintercept = -1.5, linetype = "dashed", color = "darkgreen", size = 1) +
   coord_flip() +
+  theme_minimal() +
   theme(axis.text.x = element_text(hjust = 0.5, vjust = 0.5, size = 13),
         axis.text.y = element_text(size = 13),
         axis.title = element_text(size = 16),
