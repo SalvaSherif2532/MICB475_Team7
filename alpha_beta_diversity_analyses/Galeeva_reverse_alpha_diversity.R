@@ -98,7 +98,7 @@ sample_data(galeeva_rare)$PD <- phylo_dist$PD
 
 # plot any metadata category against the PD
 plot.pd <- ggplot(sample_data(galeeva_rare), aes(inpatient, PD, fill = inpatient)) + 
-  geom_violin(colour = "black", trim = FALSE) +  
+  geom_violin(colour = "black") +  
   xlab("COVID-19 Severity") +
   ylab("Phylogenetic Diversity") + theme_minimal() + 
   stat_compare_means(method = "wilcox.test", label.y.npc = "top", label.x.npc = "centre", vjust = 1, hjust = 0.5, size = 3.5) + 
@@ -142,7 +142,7 @@ plot_richness(galeeva_rare, measures = "Observed")
 
 gg_richness <- plot_richness(galeeva_rare, x = "inpatient", measures = "Observed") +
   xlab("COVID-19 Severity") + theme_minimal() + 
-  geom_violin(aes(fill = inpatient), trim = FALSE) + 
+  geom_violin(aes(fill = inpatient)) + 
   stat_compare_means(method = "wilcox.test", label.y.npc = "top", label.x.npc = "centre", vjust = 0.5, hjust = 0.5, size = 3.5) + 
   scale_fill_manual(
     values = c("Ambulatory treatment" = "#00BFC4",  # Blue
@@ -203,7 +203,7 @@ samp_dat_wdiv$inpatient <- factor(samp_dat_wdiv$inpatient,
 gg_pielou_evenness <- samp_dat_wdiv %>%
   filter(!is.na(PielouEvenness)) %>%
   ggplot(aes(x = inpatient, y = PielouEvenness, fill = inpatient)) +
-  geom_violin(colour = "black", trim = FALSE) +
+  geom_violin(colour = "black") +
   xlab("COVID-19 Severity") +
   ylab("Pielou's Evenness") + 
   theme_minimal() + 
