@@ -11,9 +11,7 @@ library(ggsignif)
 library(ggpubr)
 
 #### Load in RData ####
-# load("galeeva_rare.RData")
-# load("galeeva_final.RData")
-galeeva_rare <- readRDS("galeeva_rare.rds")
+galeeva_rare <- readRDS("Phyloseq_objects/galeeva_rare.rds")
   
 otu_table(galeeva_rare)
 sample_data(galeeva_rare)
@@ -97,23 +95,31 @@ phylo_dist <- pd(t(otu_table(galeeva_rare)), phy_tree(galeeva_rare),
 sample_data(galeeva_rare)$PD <- phylo_dist$PD
 
 # plot any metadata category against the PD
-plot.pd <- ggplot(sample_data(galeeva_rare), aes(inpatient, PD, fill = inpatient)) + 
-  geom_violin(colour = "black") +  
-  xlab("COVID-19 Severity") +
+plot.pd <- ggplot(sample_data(galeeva_rare), aes(inpatient, PD)) + 
+  geom_violin(aes(colour = inpatient)) +
+  geom_boxplot(aes(fill = inpatient), width = 0.5) +
   ylab("Phylogenetic Diversity") + theme_minimal() + 
-  stat_compare_means(method = "wilcox.test", label.y.npc = "top", label.x.npc = "centre", vjust = 1, hjust = 0.5, size = 3.5) + 
+  #stat_compare_means(method = "wilcox.test", label.y.npc = "top", label.x.npc = "centre", vjust = 1, hjust = 0.5, size = 3.5) + 
+  scale_colour_manual(
+    values = c("Ambulatory treatment" = "#00BFC4",  # Blue
+               "Hospitalized" = "#F8766D"),         # Red
+    labels = c("Ambulatory treatment" = "Less severe", 
+               "Hospitalized" = "Severe")
+  ) +
   scale_fill_manual(
     values = c("Ambulatory treatment" = "#00BFC4",  # Blue
                "Hospitalized" = "#F8766D"),         # Red
     labels = c("Ambulatory treatment" = "Less severe", 
                "Hospitalized" = "Severe")
   ) +
-  guides(fill = "none") +  # Remove color legend
+  guides(colour = "none", fill = "none") +  # Remove color legend
   scale_x_discrete(labels = c("Ambulatory treatment" = "Less severe", 
                               "Hospitalized" = "Severe")) +  # Rename x-axis titles
   theme(
-    axis.title.x = element_text(size = 14),
-    axis.title.y = element_text(size = 14),
+    axis.title.x = element_blank(),
+    axis.title.y = element_text(size = 16),
+    axis.text.x = element_text(size = 16),
+    axis.text.y = element_text(size = 14),
     plot.title = element_text(size = 14)
   )
 
