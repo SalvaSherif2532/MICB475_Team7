@@ -1,10 +1,6 @@
 # MICB475_Team7  
 
 #### [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
-### March 6, 2025 Agenda - Rana
-#### Updates
-* Going forward we will have a meeting chair (in charge of agenda, keeping meeting on time, and taking meeting minutes) --> today it's Rana (me!)
-
 ### April 3, 2025 - Salva
 * Salva will run the model on Al-Momani dataset
 * Group will schedule a meeting with Bessie next week to discuss
@@ -152,7 +148,7 @@
 * SIDE NOTE:
   * Salva will show Melika push/pull github
  
-### March 6, 2025 Agenda
+### March 6, 2025 Agenda - Rana
 * Introduction feedback
   * Scrap last two paragraphs of intro and move it to discussion
   * Don't talk about geographical locations
