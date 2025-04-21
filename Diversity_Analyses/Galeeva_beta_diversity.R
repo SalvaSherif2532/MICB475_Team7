@@ -3,10 +3,10 @@ library(phyloseq)
 library(ape)
 library(tidyverse)
 library(picante)
-galeeva_final <- readRDS("galeeva_final.RDS")
-galeeva_rare <- readRDS("galeeva_rare.RDS")
+galeeva_final <- readRDS("Phyloseq_objects/galeeva_final.RDS")
+galeeva_rare <- readRDS("Phyloseq_objects/galeeva_rare.RDS")
 
-bc_dm <- distance(gal_df, method="bray")
+bc_dm <- distance(galeeva_rare, method="bray")
 # check which methods you can specify
 ?distance
 
@@ -16,16 +16,56 @@ plot_ordination(galeeva_rare, pcoa_bray_bc, color = "inpatient")
 
 gg_bray_pcoa <- plot_ordination(galeeva_rare, pcoa_bray_bc, color = "inpatient") +
   scale_color_manual(
-    name = "Severity",
+    name = "COVID-19 Patient 
+       Outcome 
+  (Russian Cohort)",
     values = c("Ambulatory treatment" = "#00BFC4", "Hospitalized" = "#F8766D"),
-    labels = c("Ambulatory treatment" = "Moderate", "Hospitalized" = "Severe")
+    labels = c("Ambulatory treatment" = "Ambulatory
+treatment",
+               "Hospitalized" = "Hospitalized")
   ) +
-  labs(col = "Severity")
+  labs(col = "COVID-19 Patient Outcome") +
+  theme_minimal() +
+  theme(
+    panel.grid = element_blank(),
+    axis.line.x = element_line(linewidth = 0.2),
+    axis.line.y = element_line(linewidth = 0.2),
+    axis.text = element_text(size = 12),
+    axis.title = element_text(size = 12),
+    legend.text = element_text(size = 14),
+    legend.title = element_text(size = 14)
+  )
 
 gg_bray_pcoa
+
 ggsave("plot_bray_pcoa_galeeva_final.png"
        , gg_bray_pcoa
        , height=4, width=5)
+
+gg_bray_pcoa_no_legend <- plot_ordination(galeeva_rare, pcoa_bray_bc, color = "inpatient") +
+  scale_color_manual(
+    name = "COVID-19 Patient 
+Outcome (Russian Cohort)",
+    values = c("Ambulatory treatment" = "#00BFC4", "Hospitalized" = "#F8766D"),
+    labels = c("Ambulatory treatment" = "Ambulatory
+treatment",
+               "Hospitalized" = "Hospitalized")
+  ) +
+  guides(colour = "none") + #no legend to maximize figure space
+  theme_minimal() +
+  theme(
+    panel.grid = element_blank(),
+    axis.line.x = element_line(linewidth = 0.2),
+    axis.line.y = element_line(linewidth = 0.2),
+    axis.text = element_text(size = 12),
+    axis.title = element_text(size = 12),
+  )
+
+gg_bray_pcoa_no_legend
+
+ggsave("plot_bray_pcoa_galeeva_no_legend_final.png"
+       , gg_bray_pcoa_no_legend
+       , height=4, width=4)
 
 #Jaccard 
 jaccard_dm <- distance(galeeva_rare, method="jaccard")
@@ -69,12 +109,28 @@ pcoa_unifrac_bc <- ordinate(galeeva_rare, method="PCoA", distance= unifrac_dm)
 plot_ordination(galeeva_rare, pcoa_unifrac_bc, color = "inpatient")
 
 gg_unifrac_pcoa <- plot_ordination(galeeva_rare, pcoa_unifrac_bc, color = "inpatient") +
-  labs(col="Severity")
+  scale_color_manual(
+    name = "COVID-19 Patient 
+Outcome (Russian Cohort)",
+    values = c("Ambulatory treatment" = "#00BFC4", "Hospitalized" = "#F8766D"),
+    labels = c("Ambulatory treatment" = "Ambulatory
+treatment",
+               "Hospitalized" = "Hospitalized")
+  ) +
+  guides(colour = "none") + #no legend to maximize figure space
+  theme_minimal() +
+  theme(
+    panel.grid = element_blank(),
+    axis.line.x = element_line(linewidth = 0.2),
+    axis.line.y = element_line(linewidth = 0.2),
+    axis.text = element_text(size = 12),
+    axis.title = element_text(size = 12),
+  )
 gg_unifrac_pcoa
 
 ggsave("plot_unifrac_pcoa_galeeva.png"
        , gg_unifrac_pcoa
-       , height=4, width=5)
+       , height=4, width=4)
 ###Permanova####
 #Bray Curtis: 
 # Extract metadata

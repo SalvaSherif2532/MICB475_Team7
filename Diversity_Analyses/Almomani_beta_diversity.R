@@ -3,14 +3,16 @@ library(phyloseq)
 library(ape)
 library(tidyverse)
 library(picante)
-load("almomani_final.RData")
-load("almomani_rare.RData")
-almomani_final <- readRDS("almomani_final.RDS")
-almomani_rare <- readRDS("almomani_rare.RDS")
+# load("almomani_final.RData")
+# load("almomani_rare.RData")
 
+almomani_final <- readRDS("Phyloseq_objects/almomani_final.RDS")
+almomani_rare <- readRDS("Phyloseq_objects/almomani_rare.RDS")
+
+####  Beta Diversities on Sample Types ####
 bc_dm <- distance(almomani_rare, method="bray")
 # check which methods you can specify
-?distance
+#?distance
 
 pcoa_bray_bc <- ordinate(almomani_rare, method="PCoA", distance=bc_dm)
 
@@ -73,16 +75,15 @@ almomani_sputum <- subset_samples(almomani_rare, env_medium == "Sputum")
 almomani_no_control <- subset_samples(almomani_sputum , Host_disease != "Control")
 bc_dm <- distance(almomani_no_control , method="bray")
 # check which methods you can specify
-?distance
+#?distance
 
-unifrac_dm <- ordinate(almomani_no_control , method="PCoA", distance="unifrac")
-
+pcoa_bray_bc <- ordinate(almomani_rare, method="PCoA", distance=bc_dm)
 plot_ordination(almomani_no_control , pcoa_bray_bc, color = "Host_disease")
 
 gg_bray_pcoa <- plot_ordination(almomani_no_control ,  pcoa_bray_bc, color = "Host_disease") +
   theme_classic()+
   scale_color_manual(
-    name = "Severity",
+    name = "COVID-19 Patient",
     values = c("Covid" = "#00BFC4", "ICU" = "#F8766D"),
     labels = c("Covid" = "Less severe", "ICU" = "Severe")
   ) +
@@ -102,6 +103,7 @@ unifrac_dm <- distance(almomani_no_control , method="unifrac")
 # check which methods you can specify
 ?distance
 
+unifrac_dm <- ordinate(almomani_no_control , method="PCoA", distance="unifrac")
 pcoa_unifrac_bc <- ordinate(almomani_no_control , method="PCoA", distance=unifrac_dm)
 
 plot_ordination(almomani_no_control , pcoa_unifrac_bc, color = "Host_disease")
