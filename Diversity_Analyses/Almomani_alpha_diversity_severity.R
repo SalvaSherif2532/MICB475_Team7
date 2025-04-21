@@ -14,8 +14,7 @@ library(ggpubr)
 
 
 #### Load in RData ####
-load("almomani_rare.RData")
-load("almomani_final.RData")
+almomani_rare <- readRDS("Phyloseq_objects/almomani_rare.rds")
 
 otu_table(almomani_rare)
 sample_data(almomani_rare)
@@ -102,26 +101,38 @@ phylo_dist <- pd(t(otu_table(almomani_rare_sputum_no_control)), phy_tree(almoman
 sample_data(almomani_rare_sputum_no_control)$PD <- phylo_dist$PD
 
 # plot any metadata category against the PD
-plot.pd <- ggplot(sample_data(almomani_rare_sputum_no_control), aes(Host_disease, PD, fill = Host_disease)) + 
-  geom_violin(colour = "black", trim = FALSE) +
-  xlab("COVID-19 Severity") +
+ylabels = seq(0, 20, 5)
+
+plot.pd <- ggplot(sample_data(almomani_rare_sputum_no_control), aes(Host_disease, PD)) + 
+  geom_violin(aes(colour = Host_disease)) +
+  geom_boxplot(aes(fill = Host_disease), width = 0.22) +
   ylab("Phylogenetic Diversity") + theme_minimal() + 
-  stat_compare_means(method = "wilcox.test", label.y.npc = "top", label.x.npc = "centre", vjust = 0.2, hjust = 0.5, size = 3.5) + 
+  #stat_compare_means(method = "wilcox.test", label.y.npc = "top", label.x.npc = "centre", vjust = 0.2, hjust = 0.5, size = 3.5) + 
+  scale_colour_manual(
+    values = c("Covid" = "#00BFC4",  # Blue
+               "ICU" = "#F8766D"),         # Red
+    labels = c("Covid" = "Less severe", 
+               "ICU" = "Severe")
+  ) +
   scale_fill_manual(
     values = c("Covid" = "#00BFC4",  # Blue
                "ICU" = "#F8766D"),         # Red
     labels = c("Covid" = "Less severe", 
                "ICU" = "Severe")
   ) +
-  guides(fill = "none") +  # Remove color legend
+  scale_y_continuous(labels = ylabels,
+                     breaks = ylabels,
+                     limits = c(0, 20)) +
+  guides(colour = "none", fill = "none") +  # Remove color legend
   scale_x_discrete(labels = c("Covid" = "Less severe", 
                               "ICU" = "Severe")) +  # Rename x-axis titles
   theme(
-    axis.title.x = element_text(size = 14),
-    axis.title.y = element_text(size = 14),
+    axis.title.x = element_blank(),
+    axis.title.y = element_text(size = 16),
+    axis.text.x = element_text(size = 16),
+    axis.text.y = element_text(size = 14),
     plot.title = element_text(size = 14)
   )
-
 
 # view plot
 plot.pd
@@ -145,25 +156,39 @@ print(wilcox_test_result)
 
 plot_richness(almomani_rare_sputum_no_control, measures = "Observed") 
 
+ylabels = seq(0, 250, 50)
+
 almomani_richness <- plot_richness(almomani_rare_sputum_no_control, x = "Host_disease", measures = "Observed") +
-  xlab("COVID-19 Severity") +
+  ylab("Observed Features") +
   theme_minimal() + 
-  geom_violin(aes(fill = Host_disease), trim = FALSE) + 
-  stat_compare_means(method = "wilcox.test", label.y.npc = "top", label.x.npc = "centre", vjust = 0.5, hjust = 0.5, size = 3.5) + 
+  geom_violin(aes(colour = Host_disease)) + 
+  geom_boxplot(aes(fill = Host_disease), width = 0.25) +
+  #stat_compare_means(method = "wilcox.test", label.y.npc = "top", label.x.npc = "centre", vjust = 0.5, hjust = 0.5, size = 3.5) + 
   scale_fill_manual(
     values = c("Covid" = "#00BFC4",  # Blue
                "ICU" = "#F8766D"),         # Red
     labels = c("Covid" = "Less severe", 
                "ICU" = "Severe")
   ) +
-  guides(fill = "none") +  # Remove color legend
+  scale_colour_manual(
+    values = c("Covid" = "#00BFC4",  # Blue
+               "ICU" = "#F8766D"),         # Red
+    labels = c("Covid" = "Less severe", 
+               "ICU" = "Severe")
+  ) +
+  scale_y_continuous(labels = ylabels,
+                     breaks = ylabels,
+                     limits = c(0, 250)) +
+  guides(fill = "none", colour = "none") +  # Remove color legend
   scale_x_discrete(labels = c("Covid" = "Less severe", 
                               "ICU" = "Severe")) +  # Rename x-axis titles
   theme(
-    axis.title.x = element_text(size = 14),
-    axis.title.y = element_text(size = 14),
-    plot.title = element_text(size = 14),
-    strip.text = element_text(size = 14)
+    axis.title.x = element_blank(),
+    axis.title.y = element_text(size = 16),
+    axis.text.x = element_text(size = 16),
+    axis.text.y = element_text(size = 14),
+    plot.title = element_blank(),
+    strip.text = element_blank()
   )
 
 almomani_richness
@@ -205,28 +230,40 @@ pielou_evenness <- shannon_diversity / log(species_richness)
 samp_dat <- sample_data(almomani_rare_sputum_no_control)
 samp_dat_wdiv <- data.frame(samp_dat, alphadiv, PielouEvenness = pielou_evenness)
 
-# Visualize Pielou's Evenness for different 'env_medium' categories
+# Visualize Pielou's Evenness for different 'Host_disease' categories
+ylabels = seq(0, 1.2, 0.2)
+
 gg_pielou_evenness <- samp_dat_wdiv %>%
   filter(!is.na(PielouEvenness)) %>%
-  ggplot(aes(x = Host_disease, y = PielouEvenness, fill = Host_disease)) +
-  geom_violin(colour = "black", trim = FALSE) +
-  xlab("COVID-19 Severity") +
+  ggplot(aes(x = Host_disease, y = PielouEvenness)) +
+  geom_violin(aes(colour = Host_disease)) +
+  geom_boxplot(aes(fill = Host_disease), width = 0.2) +
   ylab("Pielou's Evenness") + 
   theme_minimal() + 
-  stat_compare_means(method = "wilcox.test", label.y.npc = "top", label.x.npc = "centre", vjust = 0.05, hjust = 0.5, size = 3.5) + 
+  #stat_compare_means(method = "wilcox.test", label.y.npc = "top", label.x.npc = "centre", vjust = 0.05, hjust = 0.5, size = 3.5) + 
   scale_fill_manual(
     values = c("Covid" = "#00BFC4",  # Blue
                "ICU" = "#F8766D"),         # Red
     labels = c("Covid" = "Less severe", 
                "ICU" = "Severe")
   ) +
-  guides(fill = "none") +  # Remove color legend
+  scale_colour_manual(
+    values = c("Covid" = "#00BFC4",  # Blue
+               "ICU" = "#F8766D"),         # Red
+    labels = c("Covid" = "Less severe", 
+               "ICU" = "Severe")
+  ) +
+  scale_y_continuous(labels = ylabels,
+                     breaks = ylabels,
+                     limits = c(0, 1)) +
+  guides(fill = "none", colour = "none") +  # Remove color legend
   scale_x_discrete(labels = c("Covid" = "Less severe", 
                               "ICU" = "Severe")) + 
   theme(
-    axis.title.x = element_text(size = 14),
-    axis.title.y = element_text(size = 14),
-    plot.title = element_text(size = 14)
+    axis.title.x = element_blank(),
+    axis.title.y = element_text(size = 16),
+    axis.text.x = element_text(size = 16),
+    axis.text.y = element_text(size = 14)
   )
 
 # Print the plot

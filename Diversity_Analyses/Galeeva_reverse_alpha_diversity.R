@@ -94,6 +94,8 @@ phylo_dist <- pd(t(otu_table(galeeva_rare)), phy_tree(galeeva_rare),
 # add PD to metadata table
 sample_data(galeeva_rare)$PD <- phylo_dist$PD
 
+ylabels = seq(0, 14, 2)
+
 # plot any metadata category against the PD
 plot.pd <- ggplot(sample_data(galeeva_rare), aes(inpatient, PD)) + 
   geom_violin(aes(colour = inpatient)) +
@@ -112,6 +114,9 @@ plot.pd <- ggplot(sample_data(galeeva_rare), aes(inpatient, PD)) +
     labels = c("Ambulatory treatment" = "Less severe", 
                "Hospitalized" = "Severe")
   ) +
+  scale_y_continuous(labels = ylabels,
+                     breaks = ylabels,
+                     limits = c(0, 14)) +
   guides(colour = "none", fill = "none") +  # Remove color legend
   scale_x_discrete(labels = c("Ambulatory treatment" = "Less severe", 
                               "Hospitalized" = "Severe")) +  # Rename x-axis titles
@@ -146,24 +151,37 @@ print(wilcox_test_result)
 
 plot_richness(galeeva_rare, measures = "Observed") 
 
+ylabels = seq(0, 150, 25)
+
 gg_richness <- plot_richness(galeeva_rare, x = "inpatient", measures = "Observed") +
-  xlab("COVID-19 Severity") + theme_minimal() + 
-  geom_violin(aes(fill = inpatient)) + 
-  stat_compare_means(method = "wilcox.test", label.y.npc = "top", label.x.npc = "centre", vjust = 0.5, hjust = 0.5, size = 3.5) + 
+  ylab("Observed Features") + theme_minimal() + 
+  geom_violin(aes(colour = inpatient)) + 
+  geom_boxplot(aes(fill = inpatient), width = 0.5) +
+  #stat_compare_means(method = "wilcox.test", label.y.npc = "top", label.x.npc = "centre", vjust = 0.5, hjust = 0.5, size = 3.5) + 
   scale_fill_manual(
     values = c("Ambulatory treatment" = "#00BFC4",  # Blue
                "Hospitalized" = "#F8766D"),         # Red
     labels = c("Ambulatory treatment" = "Less severe", 
                "Hospitalized" = "Severe")
   ) +
-  guides(fill = "none") +  # Remove color legend
+  scale_colour_manual(
+    values = c("Ambulatory treatment" = "#00BFC4",  # Blue
+               "Hospitalized" = "#F8766D"),         # Red
+    labels = c("Ambulatory treatment" = "Less severe", 
+               "Hospitalized" = "Severe")
+  ) +
+  guides(fill = "none", colour = "none") +  # Remove color legend
   scale_x_discrete(labels = c("Ambulatory treatment" = "Less severe", 
                               "Hospitalized" = "Severe")) +  # Rename x-axis titles
+  scale_y_continuous(labels = ylabels,
+                     breaks = ylabels,
+                     limits = c(0, 150)) +
   theme(
-    axis.title.x = element_text(size = 14),
-    axis.title.y = element_text(size = 14),
-    plot.title = element_text(size = 14),
-    strip.text = element_text(size = 14),    # Change size of the measures text
+    axis.title.x = element_blank(),
+    axis.title.y = element_text(size = 16),
+    plot.title = element_blank(),
+    axis.text.y = element_text(size = 14),
+    axis.text.x = element_text(size = 16)    # Change size of the measures text
   )
 gg_richness
 
@@ -205,28 +223,44 @@ samp_dat <- sample_data(galeeva_rare)
 samp_dat_wdiv <- data.frame(samp_dat, alphadiv, PielouEvenness = pielou_evenness)
 samp_dat_wdiv$inpatient <- factor(samp_dat_wdiv$inpatient, 
                                           levels = c("Ambulatory treatment", "Hospitalized"))
+
 # Visualize Pielou's Evenness for different 'inpatient' categories
+ylabels = seq(0, 1.2, 0.2)
+
 gg_pielou_evenness <- samp_dat_wdiv %>%
   filter(!is.na(PielouEvenness)) %>%
-  ggplot(aes(x = inpatient, y = PielouEvenness, fill = inpatient)) +
-  geom_violin(colour = "black") +
-  xlab("COVID-19 Severity") +
+  ggplot(aes(x = inpatient, y = PielouEvenness)) +
+  geom_violin(aes(colour = inpatient)) +
+  geom_boxplot(aes(fill = inpatient), width = 0.4) +
   ylab("Pielou's Evenness") + 
   theme_minimal() + 
-  stat_compare_means(method = "wilcox.test", label.y.npc = "top", label.x.npc = "centre", vjust = 0.2, hjust = 0.5, size = 3.5) + 
+  #stat_compare_means(method = "wilcox.test", label.y.npc = "top", label.x.npc = "centre", vjust = 0.2, hjust = 0.5, size = 3.5) + 
   scale_fill_manual(
     values = c("Ambulatory treatment" = "#00BFC4",  # Blue
                "Hospitalized" = "#F8766D"),         # Red
     labels = c("Ambulatory treatment" = "Less severe", 
                "Hospitalized" = "Severe")
   ) +
+  scale_colour_manual(
+    values = c("Ambulatory treatment" = "#00BFC4",  # Blue
+               "Hospitalized" = "#F8766D"),         # Red
+    labels = c("Ambulatory treatment" = "Less severe", 
+               "Hospitalized" = "Severe")
+  ) +
+  guides(fill = "none", colour = "none") +  # Remove color legend
+  scale_x_discrete(labels = c("Ambulatory treatment" = "Less severe", 
+                              "Hospitalized" = "Severe")) +  # Rename x-axis titles
+  scale_y_continuous(labels = ylabels,
+                    breaks = ylabels,
+                    limits = c(0, 1)) +
   guides(fill = "none") +  # Remove color legend
   scale_x_discrete(labels = c("Ambulatory treatment" = "Less severe", 
                               "Hospitalized" = "Severe")) + 
   theme(
-    axis.title.x = element_text(size = 14),
-    axis.title.y = element_text(size = 14),
-    plot.title = element_text(size = 14)
+    axis.title.x = element_blank(),
+    axis.title.y = element_text(size = 16),
+    axis.text.x = element_text(size = 16),
+    axis.text.y = element_text(size = 14)
   )
 
 # Print the plot
