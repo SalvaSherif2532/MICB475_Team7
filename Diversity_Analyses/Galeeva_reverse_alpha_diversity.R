@@ -36,12 +36,8 @@ gg_shannon_diversity <- plot_richness(galeeva_rare, x = "inpatient", measures = 
   scale_color_manual(
     values = c("Ambulatory treatment" = "#00BFC4",  # Blue
                "Hospitalized" = "#F8766D"),         # Red
-    labels = c("Ambulatory treatment" = "Less severe", 
-               "Hospitalized" = "Severe")
   ) +
   guides(color = "none") +  # Remove color legend
-  scale_x_discrete(labels = c("Ambulatory treatment" = "Less severe", 
-                              "Hospitalized" = "Severe")) +  # Rename x-axis titles
   theme(
     axis.title.x = element_text(size = 14),
     axis.title.y = element_text(size = 14),
@@ -105,21 +101,18 @@ plot.pd <- ggplot(sample_data(galeeva_rare), aes(inpatient, PD)) +
   scale_colour_manual(
     values = c("Ambulatory treatment" = "#00BFC4",  # Blue
                "Hospitalized" = "#F8766D"),         # Red
-    labels = c("Ambulatory treatment" = "Less severe", 
-               "Hospitalized" = "Severe")
   ) +
   scale_fill_manual(
     values = c("Ambulatory treatment" = "#00BFC4",  # Blue
                "Hospitalized" = "#F8766D"),         # Red
-    labels = c("Ambulatory treatment" = "Less severe", 
-               "Hospitalized" = "Severe")
   ) +
   scale_y_continuous(labels = ylabels,
                      breaks = ylabels,
                      limits = c(0, 14)) +
+  scale_x_discrete(labels = c("Ambulatory treatment" = "Ambulatory
+treatment",
+                              "Hospitalized" ="Hospitalized")) +
   guides(colour = "none", fill = "none") +  # Remove color legend
-  scale_x_discrete(labels = c("Ambulatory treatment" = "Less severe", 
-                              "Hospitalized" = "Severe")) +  # Rename x-axis titles
   theme(
     axis.title.x = element_blank(),
     axis.title.y = element_text(size = 16),
@@ -161,26 +154,24 @@ gg_richness <- plot_richness(galeeva_rare, x = "inpatient", measures = "Observed
   scale_fill_manual(
     values = c("Ambulatory treatment" = "#00BFC4",  # Blue
                "Hospitalized" = "#F8766D"),         # Red
-    labels = c("Ambulatory treatment" = "Less severe", 
-               "Hospitalized" = "Severe")
   ) +
   scale_colour_manual(
     values = c("Ambulatory treatment" = "#00BFC4",  # Blue
                "Hospitalized" = "#F8766D"),         # Red
-    labels = c("Ambulatory treatment" = "Less severe", 
-               "Hospitalized" = "Severe")
   ) +
   guides(fill = "none", colour = "none") +  # Remove color legend
-  scale_x_discrete(labels = c("Ambulatory treatment" = "Less severe", 
-                              "Hospitalized" = "Severe")) +  # Rename x-axis titles
   scale_y_continuous(labels = ylabels,
                      breaks = ylabels,
                      limits = c(0, 150)) +
+  scale_x_discrete(labels = c("Ambulatory treatment" = "Ambulatory
+treatment",
+                              "Hospitalized" ="Hospitalized")) +
   theme(
     axis.title.x = element_blank(),
     axis.title.y = element_text(size = 16),
     plot.title = element_blank(),
     axis.text.y = element_text(size = 14),
+    strip.text = element_blank(),
     axis.text.x = element_text(size = 16)    # Change size of the measures text
   )
 gg_richness
@@ -238,24 +229,18 @@ gg_pielou_evenness <- samp_dat_wdiv %>%
   scale_fill_manual(
     values = c("Ambulatory treatment" = "#00BFC4",  # Blue
                "Hospitalized" = "#F8766D"),         # Red
-    labels = c("Ambulatory treatment" = "Less severe", 
-               "Hospitalized" = "Severe")
   ) +
   scale_colour_manual(
     values = c("Ambulatory treatment" = "#00BFC4",  # Blue
                "Hospitalized" = "#F8766D"),         # Red
-    labels = c("Ambulatory treatment" = "Less severe", 
-               "Hospitalized" = "Severe")
   ) +
   guides(fill = "none", colour = "none") +  # Remove color legend
-  scale_x_discrete(labels = c("Ambulatory treatment" = "Less severe", 
-                              "Hospitalized" = "Severe")) +  # Rename x-axis titles
   scale_y_continuous(labels = ylabels,
                     breaks = ylabels,
                     limits = c(0, 1)) +
-  guides(fill = "none") +  # Remove color legend
-  scale_x_discrete(labels = c("Ambulatory treatment" = "Less severe", 
-                              "Hospitalized" = "Severe")) + 
+  scale_x_discrete(labels = c("Ambulatory treatment" = "Ambulatory
+treatment",
+                              "Hospitalized" ="Hospitalized")) +
   theme(
     axis.title.x = element_blank(),
     axis.title.y = element_text(size = 16),

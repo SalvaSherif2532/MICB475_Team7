@@ -111,21 +111,17 @@ plot.pd <- ggplot(sample_data(almomani_rare_sputum_no_control), aes(Host_disease
   scale_colour_manual(
     values = c("Covid" = "#00BFC4",  # Blue
                "ICU" = "#F8766D"),         # Red
-    labels = c("Covid" = "Less severe", 
-               "ICU" = "Severe")
   ) +
   scale_fill_manual(
     values = c("Covid" = "#00BFC4",  # Blue
                "ICU" = "#F8766D"),         # Red
-    labels = c("Covid" = "Less severe", 
-               "ICU" = "Severe")
   ) +
   scale_y_continuous(labels = ylabels,
                      breaks = ylabels,
                      limits = c(0, 20)) +
   guides(colour = "none", fill = "none") +  # Remove color legend
-  scale_x_discrete(labels = c("Covid" = "Less severe", 
-                              "ICU" = "Severe")) +  # Rename x-axis titles
+  scale_x_discrete(labels = c("Covid" = "Non-ICU", 
+                              "ICU" = "ICU")) +  # Rename x-axis titles
   theme(
     axis.title.x = element_blank(),
     axis.title.y = element_text(size = 16),
@@ -167,21 +163,17 @@ almomani_richness <- plot_richness(almomani_rare_sputum_no_control, x = "Host_di
   scale_fill_manual(
     values = c("Covid" = "#00BFC4",  # Blue
                "ICU" = "#F8766D"),         # Red
-    labels = c("Covid" = "Less severe", 
-               "ICU" = "Severe")
   ) +
   scale_colour_manual(
     values = c("Covid" = "#00BFC4",  # Blue
                "ICU" = "#F8766D"),         # Red
-    labels = c("Covid" = "Less severe", 
-               "ICU" = "Severe")
   ) +
   scale_y_continuous(labels = ylabels,
                      breaks = ylabels,
                      limits = c(0, 250)) +
   guides(fill = "none", colour = "none") +  # Remove color legend
-  scale_x_discrete(labels = c("Covid" = "Less severe", 
-                              "ICU" = "Severe")) +  # Rename x-axis titles
+  scale_x_discrete(labels = c("Covid" = "Non-ICU", 
+                              "ICU" = "ICU")) +  # Rename x-axis titles
   theme(
     axis.title.x = element_blank(),
     axis.title.y = element_text(size = 16),
@@ -244,21 +236,17 @@ gg_pielou_evenness <- samp_dat_wdiv %>%
   scale_fill_manual(
     values = c("Covid" = "#00BFC4",  # Blue
                "ICU" = "#F8766D"),         # Red
-    labels = c("Covid" = "Less severe", 
-               "ICU" = "Severe")
   ) +
   scale_colour_manual(
     values = c("Covid" = "#00BFC4",  # Blue
                "ICU" = "#F8766D"),         # Red
-    labels = c("Covid" = "Less severe", 
-               "ICU" = "Severe")
   ) +
   scale_y_continuous(labels = ylabels,
                      breaks = ylabels,
                      limits = c(0, 1)) +
   guides(fill = "none", colour = "none") +  # Remove color legend
-  scale_x_discrete(labels = c("Covid" = "Less severe", 
-                              "ICU" = "Severe")) + 
+  scale_x_discrete(labels = c("Covid" = "Non-ICU", 
+                              "ICU" = "ICU")) +  # Rename x-axis titles
   theme(
     axis.title.x = element_blank(),
     axis.title.y = element_text(size = 16),
