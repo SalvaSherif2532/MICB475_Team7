@@ -16,11 +16,10 @@ plot_ordination(galeeva_rare, pcoa_bray_bc, color = "inpatient")
 
 gg_bray_pcoa <- plot_ordination(galeeva_rare, pcoa_bray_bc, color = "inpatient") +
   scale_color_manual(
-    name = "COVID-19 Patient 
-       Outcome 
-  (Russian Cohort)",
+    name = "COVID-19 Patient Outcome 
+          (Russian Cohort)",
     values = c("Ambulatory treatment" = "#00BFC4", "Hospitalized" = "#F8766D"),
-    labels = c("Ambulatory treatment" = "Ambulatory
+    labels = c("Ambulatory treatment" = "Ambulatory 
 treatment",
                "Hospitalized" = "Hospitalized")
   ) +
@@ -38,7 +37,7 @@ treatment",
 
 gg_bray_pcoa
 
-ggsave("plot_bray_pcoa_galeeva_final.png"
+ggsave("plot_bray_pcoa_galeeva_final2.png"
        , gg_bray_pcoa
        , height=4, width=5)
 

@@ -81,19 +81,55 @@ pcoa_bray_bc <- ordinate(almomani_rare, method="PCoA", distance=bc_dm)
 plot_ordination(almomani_no_control , pcoa_bray_bc, color = "Host_disease")
 
 gg_bray_pcoa <- plot_ordination(almomani_no_control ,  pcoa_bray_bc, color = "Host_disease") +
-  theme_classic()+
   scale_color_manual(
-    name = "COVID-19 Patient",
+    name = "COVID-19 PO 
+(Jordanian Cohort)",
     values = c("Covid" = "#00BFC4", "ICU" = "#F8766D"),
-    labels = c("Covid" = "Less severe", "ICU" = "Severe")
+    labels = c("Covid" = "Non-ICU",
+               "ICU" = "ICU")
   ) +
-  labs(col = "Severity")
+  labs(col = "COVID-19 Patient Outcome") +
+  theme_minimal() +
+  theme(
+    panel.grid = element_blank(),
+    axis.line.x = element_line(linewidth = 0.2),
+    axis.line.y = element_line(linewidth = 0.2),
+    axis.text = element_text(size = 12),
+    axis.title = element_text(size = 12),
+    legend.text = element_text(size = 14),
+    legend.title = element_text(size = 14)
+  )
 
 gg_bray_pcoa
 
 ggsave("plot_bray_pcoa_almoman_severity.png"
        , gg_bray_pcoa
        , height=4, width=5)
+
+## Repeat without colour legend ##
+gg_bray_pcoa_no_legend <- plot_ordination(almomani_no_control ,  pcoa_bray_bc, color = "Host_disease") +
+  scale_color_manual(
+    name = "COVID-19 Patient Outcome
+        (Jordanian Cohort)",
+    values = c("Covid" = "#00BFC4", "ICU" = "#F8766D"),
+    labels = c("Covid" = "Non-ICU",
+               "ICU" = "ICU")
+  ) +
+  guides(colour = "none") +
+  theme_minimal() +
+  theme(
+    panel.grid = element_blank(),
+    axis.line.x = element_line(linewidth = 0.2),
+    axis.line.y = element_line(linewidth = 0.2),
+    axis.text = element_text(size = 12),
+    axis.title = element_text(size = 12)
+  )
+
+gg_bray_pcoa_no_legend
+
+ggsave("plot_bray_pcoa_almoman_severity_no_legend.png"
+       , gg_bray_pcoa_no_legend
+       , height=4, width=4)
 
 #### unifrac Severity ####
 
@@ -103,25 +139,33 @@ unifrac_dm <- distance(almomani_no_control , method="unifrac")
 # check which methods you can specify
 ?distance
 
-unifrac_dm <- ordinate(almomani_no_control , method="PCoA", distance="unifrac")
 pcoa_unifrac_bc <- ordinate(almomani_no_control , method="PCoA", distance=unifrac_dm)
 
 plot_ordination(almomani_no_control , pcoa_unifrac_bc, color = "Host_disease")
 
 gg_unifrac_pcoa <- plot_ordination(almomani_no_control ,  pcoa_unifrac_bc, color = "Host_disease") +
-  theme_classic()+
   scale_color_manual(
-    name = "Severity",
+    name = "COVID-19 Patient Outcome
+        (Jordanian Cohort)",
     values = c("Covid" = "#00BFC4", "ICU" = "#F8766D"),
-    labels = c("Covid" = "Less severe", "ICU" = "Severe")
+    labels = c("Covid" = "Non-ICU",
+               "ICU" = "ICU")
   ) +
-  labs(col = "Severity")
+  guides(colour = "none") +
+  theme_minimal() +
+  theme(
+    panel.grid = element_blank(),
+    axis.line.x = element_line(linewidth = 0.2),
+    axis.line.y = element_line(linewidth = 0.2),
+    axis.text = element_text(size = 12),
+    axis.title = element_text(size = 12)
+  )
 
 gg_unifrac_pcoa
 
 ggsave("plot_unifrac_pcoa_almoman_severity.png"
        , gg_unifrac_pcoa
-       , height=4, width=5)
+       , height=4, width=4)
 
 ###Permanova####
 #Bray Curtis: 
